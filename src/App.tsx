@@ -7,9 +7,13 @@ import Card from "./Components/Card";
 
 
 function App() {
-  const [location, setLocation] = useState<string>("")
+  const [locationName, setLocationName] = useState<string>("")
+  const [locationRegion, setLocationRegion] = useState<string>("")
+  const [locationCountry, setLocationCountry] = useState<string>("")
   const [input, setInput] = useState<string>("")
   const [temp, setTemp] = useState<number>(0)
+  const [conditionText, setConditionText] = useState<string>('')
+  const [conditionIcon, setConditionIcon] = useState<string>('')
   const [locations, setLocations] =useState<[]>([])
   
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
@@ -29,7 +33,11 @@ function App() {
     getCity(input)
     .then(data => {
       setTemp(data?.current?.temp_f)
-      setLocation(data?.location?.name)
+      setLocationName(data?.location?.name)
+      setLocationRegion(data?.location?.region)
+      setLocationCountry(data?.location?.country)
+      setConditionText(data?.current?.condition?.text)
+      setConditionIcon(data?.current?.condition?.icon)
     })
     // .then(data=>{
     //   console.log(data.current.temp_f)
@@ -40,16 +48,20 @@ function App() {
     // })
   }, [input])
   // console.log(locations)
+  // console.log(condition)
 
   return (
     <div className="app">
+      <h1>Select Your Location</h1>
       <input type="text" placeholder="search for city here" onChange={handleChange}></input>
-      <button>SEARCH</button>
+      {/* <button>SEARCH</button> */}
       <section className="weather-card-container">
-        <Card temp={temp} location={location}/>
+      {locationName && <Card temp={temp} locationName={locationName} conditionText={conditionText}
+         conditionIcon={conditionIcon} locationRegion={locationRegion} locationCountry={locationCountry}/>}
       </section>
-      <h1>{input}</h1>
+      {/* <h1>{input}</h1>
       <h2>{temp}</h2>
+      <h2>{condition}</h2> */}
     </div>
   )
 }

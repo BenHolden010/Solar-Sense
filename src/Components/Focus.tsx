@@ -1,5 +1,5 @@
 import React from "react";
-import './Card.css'
+import './Focus.css'
 import {NavLink} from 'react-router-dom'
 
 interface Props {
@@ -11,19 +11,19 @@ conditionText: string;
 conditionIcon: string;
 }
 
-const Card = (props: Props) => {
+const FocusCard = (props: Props) => {
 
   return (
     
-      <div className='card'> 
+      <div className='focus-card'> 
         <h1>{props.locationName}, {props.locationRegion}, {props.locationCountry} </h1>
         <h1>{props.temp} °F</h1>
         <img src={props.conditionIcon}/>
         <h1>{props.conditionText}</h1>
-        <NavLink to=":{props.locationName}">  <button>View Location</button> </NavLink>
+        <NavLink to="/">  <button>Back</button> </NavLink>
       </div>
     
   ) 
 }
 
-export default Card
+export default FocusCard

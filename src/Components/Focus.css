@@ -1,0 +1,12 @@
+.focus-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: 2px solid black;
+    border-radius: 1em;
+    margin-top: 10%;
+    height:70vh;
+    padding-left:5% ;
+    padding-right: 5%;
+  }

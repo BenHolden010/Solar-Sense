@@ -4,6 +4,8 @@ import './App.css';
 import { searchCities, getCity }from './ApiCalls'
 import { useState, useEffect } from 'react';
 import Card from "./Components/Card";
+import FocusCard from "./Components/Focus"
+import {Routes, Route,NavLink} from 'react-router-dom'
 
 
 function App() {
@@ -52,16 +54,21 @@ function App() {
 
   return (
     <div className="app">
-      <h1>Select Your Location</h1>
-      <input type="text" placeholder="search for city here" onChange={handleChange}></input>
-      {/* <button>SEARCH</button> */}
+    
+      <Routes>
+        
+        <Route path="/" element={ <div><h1>Select Your Location</h1>
+      <input type="text" placeholder="search for city here" onChange={handleChange}/>
       <section className="weather-card-container">
       {locationName && <Card temp={temp} locationName={locationName} conditionText={conditionText}
-         conditionIcon={conditionIcon} locationRegion={locationRegion} locationCountry={locationCountry}/>}
-      </section>
-      {/* <h1>{input}</h1>
-      <h2>{temp}</h2>
-      <h2>{condition}</h2> */}
+         conditionIcon={conditionIcon} locationRegion={locationRegion} locationCountry={locationCountry} />}
+      </section></div>}/>
+
+        <Route path=":location" element={<FocusCard temp={temp} locationName={locationName} conditionText={conditionText}
+         conditionIcon={conditionIcon} locationRegion={locationRegion} locationCountry={locationCountry}/>}/>
+         
+      </Routes>
+  
     </div>
   )
 }

@@ -27,14 +27,17 @@ function App() {
 
   useEffect(() => {
     getCity(input)
-    // .then(data => setTemp(data.current.temp_f))
-    .then(data=>{
-      console.log(data.current.temp_f)
-      if(data.current.temp_f){
-        return console.log(data.current.temp_f)
-      }
-      return console.log("Please enter valid location")
+    .then(data => {
+      setTemp(data?.current?.temp_f)
+      setLocation(data?.location?.name)
     })
+    // .then(data=>{
+    //   console.log(data.current.temp_f)
+    //   if(data.current.temp_f){
+    //     return console.log(data.current.temp_f)
+    //   }
+    //   return console.log("Please enter valid location")
+    // })
   }, [input])
   // console.log(locations)
 

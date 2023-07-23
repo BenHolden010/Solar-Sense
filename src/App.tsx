@@ -4,6 +4,9 @@ import './App.css';
 import { searchCities, getCity }from './ApiCalls'
 import { useState, useEffect } from 'react';
 import Card from "./Components/Card";
+import FocusCard from "./Components/Focus"
+import Nav from "./Components/Nav"
+import {Routes, Route,NavLink} from 'react-router-dom'
 
 
 function App() {
@@ -15,6 +18,8 @@ function App() {
   const [conditionText, setConditionText] = useState<string>('')
   const [conditionIcon, setConditionIcon] = useState<string>('')
   const [locations, setLocations] =useState<[]>([])
+  const [sunset, setSunset] = useState<[]>([])
+  const [sunrise, setSunrise] = useState<[]>([])
   
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
     setInput(event.target.value)
@@ -38,6 +43,8 @@ function App() {
       setLocationCountry(data?.location?.country)
       setConditionText(data?.current?.condition?.text)
       setConditionIcon(data?.current?.condition?.icon)
+      setSunrise(data?.forecast?.forecastday)
+      setSunset(data?.forecast?.forcastday)
     })
     // .then(data=>{
     //   console.log(data.current.temp_f)
@@ -52,16 +59,22 @@ function App() {
 
   return (
     <div className="app">
-      <h1>Select Your Location</h1>
-      <input type="text" placeholder="search for city here" onChange={handleChange}></input>
-      {/* <button>SEARCH</button> */}
+    <Nav />
+      <Routes>
+        
+        <Route path="/" element={ <div className='app-home'><h2>Select Your Location</h2>
+      <input type="text" placeholder="search for city here" onChange={handleChange} className="search"/>
       <section className="weather-card-container">
       {locationName && <Card temp={temp} locationName={locationName} conditionText={conditionText}
-         conditionIcon={conditionIcon} locationRegion={locationRegion} locationCountry={locationCountry}/>}
-      </section>
-      {/* <h1>{input}</h1>
-      <h2>{temp}</h2>
-      <h2>{condition}</h2> */}
+         conditionIcon={conditionIcon} locationRegion={locationRegion} locationCountry={locationCountry} />}
+      </section></div>}/>
+
+        <Route path=":location" element={<FocusCard temp={temp} locationName={locationName} conditionText={conditionText}
+         conditionIcon={conditionIcon} locationRegion={locationRegion} locationCountry={locationCountry} sunset={sunset} 
+         sunrise={sunrise}/>}/>
+
+      </Routes>
+  
     </div>
   )
 }

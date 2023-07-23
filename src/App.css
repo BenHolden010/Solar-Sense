@@ -5,4 +5,15 @@
   align-items: center;
   flex-direction: column;
 }
+.app-home {
+  /* text-align: center; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.search {
+  margin-bottom:10% ;
+}
 

@@ -5,4 +5,6 @@
   flex-direction: column;
   border: 2px solid black;
   border-radius: 1em;
+  padding-left: .5%;
+  padding-right: .5%;
 }

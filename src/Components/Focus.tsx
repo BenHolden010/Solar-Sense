@@ -1,5 +1,5 @@
 import React from "react";
-import './Card.css'
+import './Focus.css'
 import {NavLink} from 'react-router-dom'
 
 interface Props {
@@ -9,21 +9,36 @@ locationCountry: string;
 temp: number;
 conditionText: string;
 conditionIcon: string;
+sunrise: [];
+sunset:any;
 }
 
-const Card = (props: Props) => {
 
+const FocusCard = (props: Props) => {
+
+
+    let forcastDay = props.sunrise.map(day => {
+      
+       return (
+        <p>{day.astro?.sunrise}</p>
+       )
+    })
+
+    // console.log(props.sunrise[0])
   return (
     
-      <div className='card'> 
+      <div className='focus-card'> 
         <h1>{props.locationName}, {props.locationRegion}, {props.locationCountry} </h1>
         <h1>{props.temp} °F</h1>
         <img src={props.conditionIcon}/>
         <h1>{props.conditionText}</h1>
-        <NavLink to="${props.locationName}">  <button>View Location</button> </NavLink>
+         {/* <p>{forcastDay}</p>  */}
+        {/* <p>{props.sunset}</p> */} */
+       
+        <NavLink to="/">  <button>Back</button> </NavLink>
       </div>
     
   ) 
 }
 
-export default Card
+export default FocusCard

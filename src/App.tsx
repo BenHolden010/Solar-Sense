@@ -7,6 +7,7 @@ import Card from "./Components/Card";
 import FocusCard from "./Components/Focus"
 import Nav from "./Components/Nav"
 import {Routes, Route,NavLink} from 'react-router-dom'
+import ServerError from './Components/ServerError';
 
 
 function App() {
@@ -20,22 +21,24 @@ function App() {
   const [locations, setLocations] =useState<[]>([])
   const [sunset, setSunset] = useState<[]>([])
   const [sunrise, setSunrise] = useState<[]>([])
+  const [serverError, setServerError] = useState<boolean>(false)
   
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
     setInput(event.target.value)
   }
   
   useEffect(() => {
-    // if (!input) {
-    //   return <p>"Please enter a Location"</p>
-    // }
-    searchCities(input)
-    .then(data => setLocations(data))
-    // .then(data => setTemp(data.current.temp_f))
+    {input && searchCities(input)
+    .then(data => {
+      setLocations(data)
+      setServerError(false)
+    })
+    .catch(error => setServerError(true))
+    }
   }, [input])
 
   useEffect(() => {
-    getCity(input)
+    {input && getCity(input)
     .then(data => {
       setTemp(data?.current?.temp_f)
       setLocationName(data?.location?.name)
@@ -45,17 +48,13 @@ function App() {
       setConditionIcon(data?.current?.condition?.icon)
       setSunrise(data?.forecast?.forecastday)
       setSunset(data?.forecast?.forcastday)
+      setServerError(false)
     })
-    // .then(data=>{
-    //   console.log(data.current.temp_f)
-    //   if(data.current.temp_f){
-    //     return console.log(data.current.temp_f)
-    //   }
-    //   return console.log("Please enter valid location")
-    // })
+    .catch(error => setServerError(true))
+  }
   }, [input])
-  // console.log(locations)
-  // console.log(condition)
+
+  console.log('SERVER ERROR', serverError);
 
   return (
     <div className="app">
@@ -64,8 +63,9 @@ function App() {
         
         <Route path="/" element={ <div className='app-home'><h2>Select Your Location</h2>
       <input type="text" placeholder="search for city here" onChange={handleChange} className="search"/>
+      {serverError && <ServerError />}
       <section className="weather-card-container">
-      {locationName && <Card temp={temp} locationName={locationName} conditionText={conditionText}
+      {!serverError && locationName && <Card temp={temp} locationName={locationName} conditionText={conditionText}
          conditionIcon={conditionIcon} locationRegion={locationRegion} locationCountry={locationCountry} />}
       </section></div>}/>
 

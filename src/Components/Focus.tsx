@@ -18,10 +18,10 @@ const FocusCard = (props: Props) => {
 
 
     let forcastDay = props.sunrise.map(day => {
-      
-       return (
-        <p>{day.astro?.sunrise}</p>
-       )
+      console.log('Day', day)
+      //  return (
+      //   <p>{day.astro?.sunrise}</p>
+      //  )
     })
 
     // console.log(props.sunrise[0])

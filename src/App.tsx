@@ -6,8 +6,9 @@ import { useState, useEffect } from 'react';
 import Card from "./Components/Card";
 import FocusCard from "./Components/Focus"
 import Nav from "./Components/Nav"
-import {Routes, Route,NavLink} from 'react-router-dom'
+import {Routes, Route, NavLink} from 'react-router-dom'
 import ServerError from './Components/ServerError';
+import SavedLocations from './Components/SavedLocations';
 
 
 function App() {
@@ -22,11 +23,23 @@ function App() {
   const [sunset, setSunset] = useState<[]>([])
   const [sunrise, setSunrise] = useState<[]>([])
   const [serverError, setServerError] = useState<boolean>(false)
+  const [savedLocations, setSavedLocations] = useState<string[]>([])
+
   
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
     setInput(event.target.value)
   }
   
+  function addLocation() {
+    setSavedLocations([...savedLocations, locationName])
+    console.log(savedLocations)
+  }
+
+//   setTodos(prevTodos => {
+//     return [...prevTodos, {id:1, name:name, complete: false}]
+// })
+console.log(locationName, 'NAME')
+
   useEffect(() => {
     {input && searchCities(input)
     .then(data => {
@@ -60,7 +73,7 @@ function App() {
     <div className="app">
     <Nav />
       <Routes>
-        
+
         <Route path="/" element={ <div className='app-home'><h2>Select Your Location</h2>
       <input type="text" placeholder="search for city here" onChange={handleChange} className="search"/>
       {serverError && <ServerError />}
@@ -69,10 +82,14 @@ function App() {
          conditionIcon={conditionIcon} locationRegion={locationRegion} locationCountry={locationCountry} />}
       </section></div>}/>
 
-        <Route path=":location" element={<FocusCard temp={temp} locationName={locationName} conditionText={conditionText}
-         conditionIcon={conditionIcon} locationRegion={locationRegion} locationCountry={locationCountry} sunset={sunset} 
-         sunrise={sunrise}/>}/>
-
+        <Route path=":location" element={<FocusCard addLocation={addLocation}
+        //  temp={temp} 
+         locationName={locationName} 
+        //  conditionText={conditionText}
+        //  conditionIcon={conditionIcon} locationRegion={locationRegion} locationCountry={locationCountry} 
+         />}
+         />
+        <Route path='/saved-locations' element={<SavedLocations name={locationName} />} />
       </Routes>
   
     </div>

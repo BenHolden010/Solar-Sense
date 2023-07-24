@@ -9,6 +9,7 @@ import Nav from "./Components/Nav"
 import {Routes, Route, NavLink} from 'react-router-dom'
 import ServerError from './Components/ServerError';
 import SavedLocations from './Components/SavedLocations';
+import { clear } from 'console';
 
 
 function App() {
@@ -21,7 +22,7 @@ function App() {
   const [conditionIcon, setConditionIcon] = useState<string>('')
   const [locations, setLocations] =useState<{}[]>([])
   const [serverError, setServerError] = useState<boolean>(false)
-  const [savedLocations, setSavedLocations] = useState<{}[]>([])
+  const [savedLocations, setSavedLocations] = useState<{}[] >([])
 
 
   const [savedTemp,setSavedTemp] = useState<number>(0)
@@ -31,11 +32,9 @@ function App() {
   const [savedConditionText, setSavedConditionText] = useState<string>("")
   const [savedConditionIcon, setSavedConditionIcon] = useState<string>("")
 
-  
-
 
   useEffect(() => {
-    const data = window.localStorage.getItem("LOCAL_STORAGE_KEY");
+    const data = window.localStorage.getItem("LOCAL_STORAGE_KEY")
     if (data !== null) setSavedLocations(JSON.parse(data))
   },[])
 
@@ -49,11 +48,17 @@ function App() {
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
     setInput(event.target.value)
   }
-
+console.log(savedLocationName)
   function addLocation() {
-  
-    setSavedLocations([...savedLocations, {name:locationName, temp:temp, region: locationRegion, country: locationCountry, icon: conditionIcon, text: conditionText} ])
-    console.log(savedLocations)
+    setSavedLocations(
+      [...savedLocations, {
+        name:savedLocationName, 
+        temp:savedTemp, 
+        region: savedLocationRegion, 
+        country: savedLocationCountry, 
+        icon: savedConditionIcon, 
+        text: savedConditionText
+      } ])
   }
 
 
@@ -111,6 +116,9 @@ console.log(location)
   return (
     <div className="app">
     <Nav />
+    <NavLink to='/saved-locations'>
+            <button>View Saved Locations</button>
+    </NavLink>
       <Routes>
 
         <Route path="/" element={ <div className='app-home'><h2>Select Your Location</h2>
@@ -122,12 +130,10 @@ console.log(location)
       </section></div>}/>
 
         <Route path=":location" element={<FocusCard addLocation={addLocation}
-        //  temp={temp} 
          locationName={locationName}  locationRegion={locationRegion} conditionText={conditionText}
          conditionIcon={conditionIcon} locationCountry={locationCountry} />}
          />
-        <Route path='/saved-locations' element={<SavedLocations savedLocationName={savedLocationName} savedRegion={savedLocationRegion} savedCountry={savedLocationCountry}
-        savedConditionText={savedConditionText} savedConditionIcon={savedConditionIcon} savedTemp={savedTemp} savedLocations={savedLocations}/> } />
+        <Route path='/saved-locations' element={<SavedLocations savedLocations={savedLocations} /> } />
       </Routes>
   
     </div>

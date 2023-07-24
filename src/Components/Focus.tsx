@@ -9,34 +9,19 @@ interface Props {
 locationName: string;
 locationRegion: string;
 locationCountry: string;
-// temp: number;
 conditionText: string;
 conditionIcon: string;
-// newLocation: string;
 addLocation: () => any;
-
-// savedLocations: [];
-// setSavedLocations: (prev: []) => [];
 }
-
 
 const FocusCard = (props: Props) => {
 
-  // const [savedLocations, setSavedLocations] = useState<[]>([])
-
-  // function  addLocation() {
-  //   // setSavedLocations([...props.savedLocations, props.newLocation])
-  //   // setSavedLocations(props.prevLocations => […props.prevLocations, props.newLocation])
-  //   setSavedLocations(props.newLocation)
-  // }
-
-
   return (
-    
+   
       <div className='focus-card'> 
         <h1>{props.locationName}
          , {props.locationRegion}, {props.locationCountry} </h1> 
-        {/* <h1>{props.temp} °F</h1>*/}
+        {/* <h1>{props.temp} °F</h1> */}
         <img src={props.conditionIcon}/>
         <h1>{props.conditionText}</h1> 
        
@@ -44,7 +29,6 @@ const FocusCard = (props: Props) => {
         <NavLink to="/">  <button>Back</button> </NavLink>
         <button className="save-button" onClick={props.addLocation}>save location</button>
       </div>
-    
   ) 
 }
 

@@ -20,24 +20,36 @@ function App() {
   const [conditionText, setConditionText] = useState<string>('')
   const [conditionIcon, setConditionIcon] = useState<string>('')
   const [locations, setLocations] =useState<[]>([])
-  const [sunset, setSunset] = useState<[]>([])
-  const [sunrise, setSunrise] = useState<[]>([])
   const [serverError, setServerError] = useState<boolean>(false)
-  const [savedLocations, setSavedLocations] = useState<string[]>([])
+  const [savedLocations, setSavedLocations] = useState<string[] >([])
 
   
+  const LOCAL_STORAGE_KEY = 'savedLocationsApp.savedLocations'
+
+  // useEffect(() => {
+  //   const storedSavedLocations = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY))
+  //   if (storedSavedLocations) setSavedLocations(storedSavedLocations)
+  // },[])
+
+
+  // useEffect(() => {
+  //   localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(savedLocations))
+
+  // }, [savedLocations])
+
+
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
     setInput(event.target.value)
   }
-  
+
   function addLocation() {
+  
     setSavedLocations([...savedLocations, locationName])
     console.log(savedLocations)
+    
   }
 
-//   setTodos(prevTodos => {
-//     return [...prevTodos, {id:1, name:name, complete: false}]
-// })
+
 console.log(locationName, 'NAME')
 
   useEffect(() => {
@@ -59,8 +71,6 @@ console.log(locationName, 'NAME')
       setLocationCountry(data?.location?.country)
       setConditionText(data?.current?.condition?.text)
       setConditionIcon(data?.current?.condition?.icon)
-      setSunrise(data?.forecast?.forecastday)
-      setSunset(data?.forecast?.forcastday)
       setServerError(false)
     })
     .catch(error => setServerError(true))
@@ -84,12 +94,11 @@ console.log(locationName, 'NAME')
 
         <Route path=":location" element={<FocusCard addLocation={addLocation}
         //  temp={temp} 
-         locationName={locationName} 
-        //  conditionText={conditionText}
-        //  conditionIcon={conditionIcon} locationRegion={locationRegion} locationCountry={locationCountry} 
-         />}
+         locationName={locationName}  locationRegion={locationRegion} conditionText={conditionText}
+         conditionIcon={conditionIcon} locationCountry={locationCountry} />}
          />
-        <Route path='/saved-locations' element={<SavedLocations name={locationName} />} />
+        <Route path='/saved-locations' element={<SavedLocations name={locationName} region={locationRegion} country={locationCountry}
+        conditionText={conditionText} conditionIcon={conditionIcon} temp={temp} savedLocations={savedLocations}/> } />
       </Routes>
   
     </div>

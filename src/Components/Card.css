@@ -1,4 +1,4 @@
-.card {
+.card , .saved-card{
   display: flex;
   justify-content: center;
   align-items: center;
@@ -7,4 +7,7 @@
   border-radius: 1em;
   padding-left: .5%;
   padding-right: .5%;
+  height:20%;
+  width:50%;
 }
+

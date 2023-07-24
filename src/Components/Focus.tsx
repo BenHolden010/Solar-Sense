@@ -39,8 +39,7 @@ const FocusCard = (props: Props) => {
         {/* <h1>{props.temp} °F</h1>*/}
         <img src={props.conditionIcon}/>
         <h1>{props.conditionText}</h1> 
-         {/* <p>{forcastDay}</p>  */}
-        {/* <p>{props.sunset}</p> */}
+       
      
         <NavLink to="/">  <button>Back</button> </NavLink>
         <button className="save-button" onClick={props.addLocation}>save location</button>

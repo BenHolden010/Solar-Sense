@@ -19,23 +19,31 @@ function App() {
   const [temp, setTemp] = useState<number>(0)
   const [conditionText, setConditionText] = useState<string>('')
   const [conditionIcon, setConditionIcon] = useState<string>('')
-  const [locations, setLocations] =useState<[]>([])
+  const [locations, setLocations] =useState<{}[]>([])
   const [serverError, setServerError] = useState<boolean>(false)
-  const [savedLocations, setSavedLocations] = useState<string[] >([])
+  const [savedLocations, setSavedLocations] = useState<{}[]>([])
+
+
+  const [savedTemp,setSavedTemp] = useState<number>(0)
+  const [savedLocationName, setSavedLocationName] = useState<string>("")
+  const [savedLocationRegion,setSavedLocationRegion] = useState<string>("")
+  const [savedLocationCountry, setSavedLocationCountry] = useState<string>("")
+  const [savedConditionText, setSavedConditionText] = useState<string>("")
+  const [savedConditionIcon, setSavedConditionIcon] = useState<string>("")
 
   
-  const LOCAL_STORAGE_KEY = 'savedLocationsApp.savedLocations'
-
-  // useEffect(() => {
-  //   const storedSavedLocations = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY))
-  //   if (storedSavedLocations) setSavedLocations(storedSavedLocations)
-  // },[])
 
 
-  // useEffect(() => {
-  //   localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(savedLocations))
+  useEffect(() => {
+    const data = window.localStorage.getItem("LOCAL_STORAGE_KEY");
+    if (data !== null) setSavedLocations(JSON.parse(data))
+  },[])
 
-  // }, [savedLocations])
+
+  useEffect(() => {
+    window.localStorage.setItem("LOCAL_STORAGE_KEY", JSON.stringify(savedLocations))
+
+  }, [savedLocations])
 
 
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
@@ -44,9 +52,8 @@ function App() {
 
   function addLocation() {
   
-    setSavedLocations([...savedLocations, locationName])
+    setSavedLocations([...savedLocations, {name:locationName, temp:temp, region: locationRegion, country: locationCountry, icon: conditionIcon, text: conditionText} ])
     console.log(savedLocations)
-    
   }
 
 
@@ -77,6 +84,28 @@ console.log(locationName, 'NAME')
   }
   }, [input])
 
+  
+   useEffect(() => {
+    
+     savedLocations.map(location => {
+console.log(location)
+    {savedLocations && getCity(location?.name)
+    .then(data => {
+      setSavedTemp(data?.current?.temp_f)
+      setSavedLocationName(data?.location?.name)
+      setSavedLocationRegion(data?.location?.region)
+      setSavedLocationCountry(data?.location?.country)
+      setSavedConditionText(data?.current?.condition?.text)
+      setSavedConditionIcon(data?.current?.condition?.icon)
+    })
+    .catch(error => setServerError(true))
+  }
+    })
+  }, [savedLocations])
+
+
+
+
   console.log('SERVER ERROR', serverError);
 
   return (
@@ -97,8 +126,8 @@ console.log(locationName, 'NAME')
          locationName={locationName}  locationRegion={locationRegion} conditionText={conditionText}
          conditionIcon={conditionIcon} locationCountry={locationCountry} />}
          />
-        <Route path='/saved-locations' element={<SavedLocations name={locationName} region={locationRegion} country={locationCountry}
-        conditionText={conditionText} conditionIcon={conditionIcon} temp={temp} savedLocations={savedLocations}/> } />
+        <Route path='/saved-locations' element={<SavedLocations savedLocationName={savedLocationName} savedRegion={savedLocationRegion} savedCountry={savedLocationCountry}
+        savedConditionText={savedConditionText} savedConditionIcon={savedConditionIcon} savedTemp={savedTemp} savedLocations={savedLocations}/> } />
       </Routes>
   
     </div>

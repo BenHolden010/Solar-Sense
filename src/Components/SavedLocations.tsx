@@ -2,8 +2,18 @@ import React from "react";
 import { getCity } from '../ApiCalls'
 import { NavLink } from "react-router-dom";
 
+interface LocationData {
+  name: string;
+  temp: number;
+  region: string;
+  country: string;
+  icon: string;
+  text: string;
+}
+
 interface Props {
-  savedLocations:any ;
+  savedLocations: LocationData[];
+  clearInputs: () => void;
 }
 
 function SavedLocations(props: Props) {
@@ -24,7 +34,7 @@ function SavedLocations(props: Props) {
 return (
 <div className="saved-container">
 <NavLink to='/'>
-   <button>Home</button>
+   <button onClick={props.clearInputs}>Home</button>
 </NavLink>
 {all}
 </div>

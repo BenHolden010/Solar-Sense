@@ -12,7 +12,16 @@ import SavedLocations from './Components/SavedLocations';
 import { clear } from 'console';
 
 
+type LocationData = {
+  name: string;
+  temp: number;
+  region: string;
+  country: string;
+  icon: string;
+  text: string;
+};
 function App() {
+
   const [locationName, setLocationName] = useState<string>("")
   const [locationRegion, setLocationRegion] = useState<string>("")
   const [locationCountry, setLocationCountry] = useState<string>("")
@@ -22,7 +31,9 @@ function App() {
   const [conditionIcon, setConditionIcon] = useState<string>('')
   const [locations, setLocations] =useState<{}[]>([])
   const [serverError, setServerError] = useState<boolean>(false)
-  const [savedLocations, setSavedLocations] = useState<{}[] >(JSON.parse(sessionStorage.getItem("SESSION_STORAGE_KEY")) || [])
+  const [savedLocations, setSavedLocations] = useState<LocationData[]>(
+    JSON.parse(sessionStorage.getItem("SESSION_STORAGE_KEY") ||'[]'
+  ));
 
 
   // const [savedTemp,setSavedTemp] = useState<number>(0)

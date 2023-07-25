@@ -9,9 +9,19 @@ import Nav from "./Components/Nav"
 import {Routes, Route, NavLink} from 'react-router-dom'
 import ServerError from './Components/ServerError';
 import SavedLocations from './Components/SavedLocations';
+import { clear } from 'console';
 
 
+type LocationData = {
+  name: string;
+  temp: number;
+  region: string;
+  country: string;
+  icon: string;
+  text: string;
+};
 function App() {
+
   const [locationName, setLocationName] = useState<string>("")
   const [locationRegion, setLocationRegion] = useState<string>("")
   const [locationCountry, setLocationCountry] = useState<string>("")
@@ -19,26 +29,60 @@ function App() {
   const [temp, setTemp] = useState<number>(0)
   const [conditionText, setConditionText] = useState<string>('')
   const [conditionIcon, setConditionIcon] = useState<string>('')
-  const [locations, setLocations] =useState<[]>([])
-  const [sunset, setSunset] = useState<[]>([])
-  const [sunrise, setSunrise] = useState<[]>([])
+  const [locations, setLocations] =useState<{}[]>([])
   const [serverError, setServerError] = useState<boolean>(false)
-  const [savedLocations, setSavedLocations] = useState<string[]>([])
+  const [savedLocations, setSavedLocations] = useState<LocationData[]>(
+    JSON.parse(sessionStorage.getItem("SESSION_STORAGE_KEY") ||'[]'
+  ));
 
-  
+
+  // const [savedTemp,setSavedTemp] = useState<number>(0)
+  const [savedLocationName, setSavedLocationName] = useState<string>("")
+  // const [savedLocationRegion,setSavedLocationRegion] = useState<string>("")
+  // const [savedLocationCountry, setSavedLocationCountry] = useState<string>("")
+  // const [savedConditionText, setSavedConditionText] = useState<string>("")
+  // const [savedConditionIcon, setSavedConditionIcon] = useState<string>("")
+
+
+  useEffect(() => {
+    const data = window.sessionStorage.getItem("SESSION_STORAGE_KEY")
+    console.log('DATA', data)
+    if (data !== null) setSavedLocations(JSON.parse(data))
+  },[])
+
+
+  useEffect(() => {
+    if(savedLocations) {
+      window.sessionStorage.setItem("SESSION_STORAGE_KEY", JSON.stringify(savedLocations))
+    }
+  }, [savedLocations])
+
+  // const [savedIdentity, setSavedIdentity] = useState(JSON.parse(sessionStorage.getItem("savedIdentity")) || [])
+
+
+  function clearInputs() {
+    if(!input){
+      return(
+        <div className="weather-card-container"></div>
+      )
+    }
+  }
+
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
     setInput(event.target.value)
   }
-  
-  function addLocation() {
-    setSavedLocations([...savedLocations, locationName])
-    console.log(savedLocations)
-  }
 
-//   setTodos(prevTodos => {
-//     return [...prevTodos, {id:1, name:name, complete: false}]
-// })
-console.log(locationName, 'NAME')
+  function addLocation() {
+    setSavedLocations(
+      [...savedLocations, {
+        name: locationName, 
+        temp: temp, 
+        region: locationRegion, 
+        country: locationCountry, 
+        icon: conditionIcon, 
+        text: conditionText
+      } ])
+  }
 
   useEffect(() => {
     {input && searchCities(input)
@@ -59,19 +103,37 @@ console.log(locationName, 'NAME')
       setLocationCountry(data?.location?.country)
       setConditionText(data?.current?.condition?.text)
       setConditionIcon(data?.current?.condition?.icon)
-      setSunrise(data?.forecast?.forecastday)
-      setSunset(data?.forecast?.forcastday)
       setServerError(false)
     })
     .catch(error => setServerError(true))
   }
   }, [input])
 
-  console.log('SERVER ERROR', serverError);
+  
+//    useEffect(() => {
+    
+//      savedLocations.map(location => {
+// console.log(location)
+//     {savedLocations && getCity(location?.name)
+//     .then(data => {
+//       setSavedTemp(data?.current?.temp_f)
+//       setSavedLocationName(data?.location?.name)
+//       setSavedLocationRegion(data?.location?.region)
+//       setSavedLocationCountry(data?.location?.country)
+//       setSavedConditionText(data?.current?.condition?.text)
+//       setSavedConditionIcon(data?.current?.condition?.icon)
+//     })
+//     .catch(error => setServerError(true))
+//   }
+//     })
+//   }, [savedLocations])
 
   return (
     <div className="app">
     <Nav />
+    <NavLink to='/saved-locations'>
+            <button>View Saved Locations</button>
+    </NavLink>
       <Routes>
 
         <Route path="/" element={ <div className='app-home'><h2>Select Your Location</h2>
@@ -82,14 +144,11 @@ console.log(locationName, 'NAME')
          conditionIcon={conditionIcon} locationRegion={locationRegion} locationCountry={locationCountry} />}
       </section></div>}/>
 
-        <Route path=":location" element={<FocusCard addLocation={addLocation}
-        //  temp={temp} 
-         locationName={locationName} 
-        //  conditionText={conditionText}
-        //  conditionIcon={conditionIcon} locationRegion={locationRegion} locationCountry={locationCountry} 
-         />}
+        <Route path=":location" element={<FocusCard temp={temp} addLocation={addLocation}
+         locationName={locationName}  locationRegion={locationRegion} conditionText={conditionText}
+         conditionIcon={conditionIcon} locationCountry={locationCountry} />}
          />
-        <Route path='/saved-locations' element={<SavedLocations name={locationName} />} />
+        <Route path='/saved-locations' element={<SavedLocations clearInputs={clearInputs} savedLocations={savedLocations} /> } />
       </Routes>
   
     </div>

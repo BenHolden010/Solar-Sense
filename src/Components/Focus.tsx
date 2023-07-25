@@ -18,7 +18,7 @@ addLocation: () => any;
 }
 
 const FocusCard = (props: Props) => {
-
+  console.log(props.locationCountry)
 
   return (
    <section className="focus-section">
@@ -29,8 +29,10 @@ const FocusCard = (props: Props) => {
       </NavLink>
 
       <div className='focus-card'> 
+
         <h1>{props.locationName}
-         , {props.locationRegion}, {props.locationCountry} </h1> 
+         , {props.locationRegion}, {props.locationCountry === "United States of America" ? "United States" : props.locationCountry} </h1> 
+        
         <p className="focus-temp">{props.temp} °F</p>
         <img src={props.conditionIcon} className="img"/>
         <h1>{props.conditionText}</h1> 

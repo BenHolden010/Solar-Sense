@@ -18,11 +18,11 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "cypress": "cypress open",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "cypress": "cypress open"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [

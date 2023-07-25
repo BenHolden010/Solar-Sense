@@ -1,7 +1,7 @@
 import React, { ChangeEvent } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { searchCities, getCity }from './ApiCalls'
+import { getCity }from './ApiCalls'
 import { useState, useEffect } from 'react';
 import Card from "./Components/Card";
 import FocusCard from "./Components/Focus"
@@ -84,15 +84,15 @@ function App() {
       } ])
   }
 
-  useEffect(() => {
-    {input && searchCities(input)
-    .then(data => {
-      setLocations(data)
-      setServerError(false)
-    })
-    .catch(error => setServerError(true))
-    }
-  }, [input])
+  // useEffect(() => {
+  //   {input && searchCities(input)
+  //   .then(data => {
+  //     setLocations(data)
+  //     setServerError(false)
+  //   })
+  //   .catch(error => setServerError(true))
+  //   }
+  // }, [input])
 
   useEffect(() => {
     {input && getCity(input)

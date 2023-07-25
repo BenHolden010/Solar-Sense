@@ -122,7 +122,7 @@ function App() {
          conditionIcon={conditionIcon} locationRegion={locationRegion} locationCountry={locationCountry} />}
       </section></div>}/>
 
-        <Route path=":location" element={<FocusCard temp={temp} addLocation={addLocation}
+        <Route path={`/location/${locationName}`} element={<FocusCard temp={temp} addLocation={addLocation}
          locationName={locationName}  locationRegion={locationRegion} conditionText={conditionText}
          conditionIcon={conditionIcon} locationCountry={locationCountry} />}
          />

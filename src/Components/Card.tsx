@@ -21,7 +21,7 @@ const Card = (props: Props) => {
         {/* <h1 className="card-temp">{props.temp} °F</h1>
         <img src={props.conditionIcon}/>
         <h1>{props.conditionText}</h1> */}
-        <NavLink to="${props.locationName}">  <button className="view-location-button"><span className="material-symbols-outlined">
+        <NavLink to={`/location/${props.locationName}`} >  <button className="view-location-button"><span className="material-symbols-outlined">
 search
 </span></button> </NavLink>
       </div>

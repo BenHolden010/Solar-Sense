@@ -1,4 +1,4 @@
-// import dummyData from "./src/dummyData/dummyData"
+
 
 describe('Home Page', () => {
   beforeEach(()=>{

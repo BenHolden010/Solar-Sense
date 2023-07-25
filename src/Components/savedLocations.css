@@ -1,0 +1,46 @@
+
+    .saved-container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+    
+      .saved-section {
+        height:100%;
+        width:100vw
+      }
+    
+      .no-saved {
+        color:white;
+        font-size:4vh;
+        margin-left:43%
+      }
+
+      .home-button {
+        border:none;
+        height:3.7vh;
+        width:8.5vw;
+        border-radius: 5px;
+        background-color: transparent;
+        color: darkblue;
+        margin-left: 47%;
+        margin-top: 2%;
+        margin-bottom: 2%;
+      }
+
+      .saved-card {
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        border: 2px solid white;
+        border-radius: 1em;
+        padding-left: 1%;
+        height:45vh;
+        width:18%;
+        font-size: 80%;
+        margin-left:5.1%;
+        margin-bottom: 5%;
+        margin-right:-1%;
+        color:white;
+      }

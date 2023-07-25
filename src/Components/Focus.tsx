@@ -12,24 +12,37 @@ locationCountry: string;
 conditionText: string;
 conditionIcon: string;
 temp: number;
+
+
 addLocation: () => any;
 }
 
 const FocusCard = (props: Props) => {
+  console.log(props.locationCountry)
 
   return (
-   
+   <section className="focus-section">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+      <NavLink to="/">  <button className="back-button"><span className="material-symbols-outlined">
+        arrow_back</span>
+        </button> 
+      </NavLink>
+
       <div className='focus-card'> 
+
         <h1>{props.locationName}
-         , {props.locationRegion}, {props.locationCountry} </h1> 
-        <h1>{props.temp} °F</h1>
-        <img src={props.conditionIcon}/>
+         , {props.locationRegion}, {props.locationCountry === "United States of America" ? "United States" : props.locationCountry} </h1> 
+        
+        <p className="focus-temp">{props.temp} °F</p>
+        <img src={props.conditionIcon} className="img"/>
         <h1>{props.conditionText}</h1> 
+      
+        <button className="save-button" onClick={props.addLocation}><span className="material-symbols-outlined">
+            bookmark</span>
+        </button>
+        </div>
        
-     
-        <NavLink to="/">  <button>Back</button> </NavLink>
-        <button className="save-button" onClick={props.addLocation}>save location</button>
-      </div>
+     </section>
   ) 
 }
 

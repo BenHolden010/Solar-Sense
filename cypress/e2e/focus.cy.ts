@@ -30,7 +30,8 @@ describe('Focus Page', () => {
     it('should return to home page when back button is clicked', () => {
       cy.get('input').type('Denver')
         .get('.view-location-button').click()
-        .get(".back-button").click().should().visit('http://localhost:3000')
+        .get(".back-button").click()
+        .get("input")
     });
 
     it('should display the selected location information', () => {

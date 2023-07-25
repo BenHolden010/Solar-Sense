@@ -11,6 +11,7 @@ locationRegion: string;
 locationCountry: string;
 conditionText: string;
 conditionIcon: string;
+temp: number;
 addLocation: () => any;
 }
 
@@ -21,7 +22,7 @@ const FocusCard = (props: Props) => {
       <div className='focus-card'> 
         <h1>{props.locationName}
          , {props.locationRegion}, {props.locationCountry} </h1> 
-        {/* <h1>{props.temp} °F</h1> */}
+        <h1>{props.temp} °F</h1>
         <img src={props.conditionIcon}/>
         <h1>{props.conditionText}</h1> 
        

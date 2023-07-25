@@ -35,13 +35,8 @@ function App() {
     JSON.parse(sessionStorage.getItem("SESSION_STORAGE_KEY") ||'[]'
   ));
 
-
-  // const [savedTemp,setSavedTemp] = useState<number>(0)
   const [savedLocationName, setSavedLocationName] = useState<string>("")
-  // const [savedLocationRegion,setSavedLocationRegion] = useState<string>("")
-  // const [savedLocationCountry, setSavedLocationCountry] = useState<string>("")
-  // const [savedConditionText, setSavedConditionText] = useState<string>("")
-  // const [savedConditionIcon, setSavedConditionIcon] = useState<string>("")
+
 
 
   useEffect(() => {
@@ -82,6 +77,7 @@ function App() {
         icon: conditionIcon, 
         text: conditionText
       } ])
+      
   }
 
   useEffect(() => {
@@ -110,35 +106,17 @@ function App() {
   }, [input])
 
   
-//    useEffect(() => {
-    
-//      savedLocations.map(location => {
-// console.log(location)
-//     {savedLocations && getCity(location?.name)
-//     .then(data => {
-//       setSavedTemp(data?.current?.temp_f)
-//       setSavedLocationName(data?.location?.name)
-//       setSavedLocationRegion(data?.location?.region)
-//       setSavedLocationCountry(data?.location?.country)
-//       setSavedConditionText(data?.current?.condition?.text)
-//       setSavedConditionIcon(data?.current?.condition?.icon)
-//     })
-//     .catch(error => setServerError(true))
-//   }
-//     })
-//   }, [savedLocations])
 
   return (
     <div className="app">
     <Nav />
-    <NavLink to='/saved-locations'>
-            <button>View Saved Locations</button>
-    </NavLink>
+  
       <Routes>
 
         <Route path="/" element={ <div className='app-home'><h2>Select Your Location</h2>
       <input type="text" placeholder="search for city here" onChange={handleChange} className="search"/>
       {serverError && <ServerError />}
+
       <section className="weather-card-container">
       {!serverError && locationName && <Card temp={temp} locationName={locationName} conditionText={conditionText}
          conditionIcon={conditionIcon} locationRegion={locationRegion} locationCountry={locationCountry} />}
@@ -150,7 +128,7 @@ function App() {
          />
         <Route path='/saved-locations' element={<SavedLocations clearInputs={clearInputs} savedLocations={savedLocations} /> } />
       </Routes>
-  
+      
     </div>
   )
 }

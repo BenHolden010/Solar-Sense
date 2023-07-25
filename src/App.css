@@ -4,6 +4,8 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  background-image: linear-gradient(rgb(153, 176, 229), darkBlue);
+  padding-bottom: 28%
 }
 .app-home {
   /* text-align: center; */
@@ -11,9 +13,16 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  color:white;
+  margin-top: 5%;
+  margin-left:3%
 }
 
 .search {
   margin-bottom:10% ;
+  height:5vh;
+  width:20vw;
+  border-radius: 5px;
+  border: none;
 }
 

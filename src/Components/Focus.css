@@ -3,10 +3,50 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    border: 2px solid black;
+    border: 2px solid white;
     border-radius: 1em;
-    margin-top: 10%;
-    height:70vh;
-    padding-left:5% ;
-    padding-right: 5%;
+    margin-top: 4%;
+    height:65vh;
+    padding-left:3% ;
+    padding-right: 3%;
+    color: white;
+    font-size: 70%;
+    text-shadow: .5px .5px black;
+  }
+
+  .focus-temp {
+    font-size: 8vh;
+  }
+
+   .save-button {
+    border:none;
+    border-radius: 5px;
+    color: white;
+    background-color: transparent;
+    margin-left: 87%;
+    margin-bottom: -16%;
+  }
+
+  .back-button {
+    margin-left: 45%;
+    margin-top: 8%;
+    background-color: transparent;
+    border:none;
+  }
+
+
+  .focus-section {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .img {
+    margin-top:-6%
+  }
+
+  .saved-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
   }

@@ -1,5 +1,4 @@
 import React from "react";
-import { getCity } from '../ApiCalls'
 import { NavLink } from "react-router-dom";
 
 interface LocationData {
@@ -32,7 +31,7 @@ function SavedLocations(props: Props) {
   })
 
 return (
-  <section>
+  <section className="saved-section">
 
      <NavLink to='/'>
      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
@@ -40,10 +39,13 @@ return (
 arrow_back
 </span></button>
     </NavLink>
-    <div className="saved-container">
 
+    {all.length? 
+    <div className="saved-container"> 
     {all}
-    </div>
+    </div> 
+    : <p className="no-saved">No Saved Locations</p>}
+    
 </section>
 
  )

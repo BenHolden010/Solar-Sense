@@ -5,7 +5,8 @@
   align-items: center;
   flex-direction: column;
   background-image: linear-gradient(rgb(153, 176, 229), darkBlue);
-  padding-bottom: 28%
+  padding-bottom: 41%;
+  
 }
 .app-home {
   /* text-align: center; */

@@ -17,12 +17,17 @@ addLocation: () => any;
 
 const FocusCard = (props: Props) => {
 
+
+  
+
+
   return (
    <section className="focus-section">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
       <NavLink to="/">  <button className="back-button"><span className="material-symbols-outlined">
-arrow_back
-</span></button> </NavLink>
+        arrow_back</span>
+        </button> 
+      </NavLink>
 
       <div className='focus-card'> 
         <h1>{props.locationName}
@@ -31,8 +36,8 @@ arrow_back
         <img src={props.conditionIcon} className="img"/>
         <h1>{props.conditionText}</h1> 
         <button className="save-button" onClick={props.addLocation}><span className="material-symbols-outlined">
-bookmark
-</span></button>
+            bookmark</span>
+        </button>
         </div>
        
      </section>

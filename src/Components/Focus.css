@@ -5,13 +5,15 @@
     flex-direction: column;
     border: 2px solid white;
     border-radius: 1em;
-    margin-top: 4%;
-    height:65vh;
+    margin-top: 5%;
+    height:63vh;
     padding-left:3% ;
     padding-right: 3%;
     color: white;
-    font-size: 70%;
+    font-size: 93%;
     text-shadow: .5px .5px black;
+    margin-left:7%;
+    
   }
 
   .focus-temp {
@@ -24,11 +26,12 @@
     color: white;
     background-color: transparent;
     margin-left: 87%;
-    margin-bottom: -16%;
+    margin-bottom: -4%;
+   
   }
 
   .back-button {
-    margin-left: 45%;
+    margin-left: 49%;
     margin-top: 8%;
     background-color: transparent;
     border:none;
@@ -49,4 +52,15 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+  }
+
+  .saved-section {
+    height:100%;
+    width:100vw
+  }
+
+  .no-saved {
+    color:white;
+    font-size:4vh;
+    margin-left:43%
   }

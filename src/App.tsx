@@ -22,47 +22,56 @@ function App() {
   const [conditionIcon, setConditionIcon] = useState<string>('')
   const [locations, setLocations] =useState<{}[]>([])
   const [serverError, setServerError] = useState<boolean>(false)
-  const [savedLocations, setSavedLocations] = useState<{}[] >([])
+  const [savedLocations, setSavedLocations] = useState<{}[] >(JSON.parse(sessionStorage.getItem("SESSION_STORAGE_KEY")) || [])
 
 
-  const [savedTemp,setSavedTemp] = useState<number>(0)
+  // const [savedTemp,setSavedTemp] = useState<number>(0)
   const [savedLocationName, setSavedLocationName] = useState<string>("")
-  const [savedLocationRegion,setSavedLocationRegion] = useState<string>("")
-  const [savedLocationCountry, setSavedLocationCountry] = useState<string>("")
-  const [savedConditionText, setSavedConditionText] = useState<string>("")
-  const [savedConditionIcon, setSavedConditionIcon] = useState<string>("")
+  // const [savedLocationRegion,setSavedLocationRegion] = useState<string>("")
+  // const [savedLocationCountry, setSavedLocationCountry] = useState<string>("")
+  // const [savedConditionText, setSavedConditionText] = useState<string>("")
+  // const [savedConditionIcon, setSavedConditionIcon] = useState<string>("")
 
 
   useEffect(() => {
-    const data = window.localStorage.getItem("LOCAL_STORAGE_KEY")
+    const data = window.sessionStorage.getItem("SESSION_STORAGE_KEY")
+    console.log('DATA', data)
     if (data !== null) setSavedLocations(JSON.parse(data))
   },[])
 
 
   useEffect(() => {
-    window.localStorage.setItem("LOCAL_STORAGE_KEY", JSON.stringify(savedLocations))
-
+    if(savedLocations) {
+      window.sessionStorage.setItem("SESSION_STORAGE_KEY", JSON.stringify(savedLocations))
+    }
   }, [savedLocations])
 
+  // const [savedIdentity, setSavedIdentity] = useState(JSON.parse(sessionStorage.getItem("savedIdentity")) || [])
+
+
+  function clearInputs() {
+    if(!input){
+      return(
+        <div className="weather-card-container"></div>
+      )
+    }
+  }
 
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
     setInput(event.target.value)
   }
-console.log(savedLocationName)
+
   function addLocation() {
     setSavedLocations(
       [...savedLocations, {
-        name:savedLocationName, 
-        temp:savedTemp, 
-        region: savedLocationRegion, 
-        country: savedLocationCountry, 
-        icon: savedConditionIcon, 
-        text: savedConditionText
+        name: locationName, 
+        temp: temp, 
+        region: locationRegion, 
+        country: locationCountry, 
+        icon: conditionIcon, 
+        text: conditionText
       } ])
   }
-
-
-console.log(locationName, 'NAME')
 
   useEffect(() => {
     {input && searchCities(input)
@@ -90,28 +99,23 @@ console.log(locationName, 'NAME')
   }, [input])
 
   
-   useEffect(() => {
+//    useEffect(() => {
     
-     savedLocations.map(location => {
-console.log(location)
-    {savedLocations && getCity(location?.name)
-    .then(data => {
-      setSavedTemp(data?.current?.temp_f)
-      setSavedLocationName(data?.location?.name)
-      setSavedLocationRegion(data?.location?.region)
-      setSavedLocationCountry(data?.location?.country)
-      setSavedConditionText(data?.current?.condition?.text)
-      setSavedConditionIcon(data?.current?.condition?.icon)
-    })
-    .catch(error => setServerError(true))
-  }
-    })
-  }, [savedLocations])
-
-
-
-
-  console.log('SERVER ERROR', serverError);
+//      savedLocations.map(location => {
+// console.log(location)
+//     {savedLocations && getCity(location?.name)
+//     .then(data => {
+//       setSavedTemp(data?.current?.temp_f)
+//       setSavedLocationName(data?.location?.name)
+//       setSavedLocationRegion(data?.location?.region)
+//       setSavedLocationCountry(data?.location?.country)
+//       setSavedConditionText(data?.current?.condition?.text)
+//       setSavedConditionIcon(data?.current?.condition?.icon)
+//     })
+//     .catch(error => setServerError(true))
+//   }
+//     })
+//   }, [savedLocations])
 
   return (
     <div className="app">
@@ -133,7 +137,7 @@ console.log(location)
          locationName={locationName}  locationRegion={locationRegion} conditionText={conditionText}
          conditionIcon={conditionIcon} locationCountry={locationCountry} />}
          />
-        <Route path='/saved-locations' element={<SavedLocations savedLocations={savedLocations} /> } />
+        <Route path='/saved-locations' element={<SavedLocations clearInputs={clearInputs} savedLocations={savedLocations} /> } />
       </Routes>
   
     </div>

@@ -1,6 +1,6 @@
 import React from "react";
-import { getCity } from '../ApiCalls'
 import { NavLink } from "react-router-dom";
+import './savedLocations.css'
 
 interface LocationData {
   name: string;
@@ -23,8 +23,8 @@ function SavedLocations(props: Props) {
     return (
 
       <div className='saved-card'> 
-        <h1>{location.name}, {location.region}, {location.country} </h1>
-        <h1>{location.temp} °F</h1>
+        <h1>{location.name}, {location.region}, {location.country === "United States of America" ? "United States" : location.country}</h1>
+        <h1 className="saved-temp">{location.temp} °F</h1>
         <img src={location.icon}/>
         <h1>{location.text}</h1>
       </div>
@@ -32,12 +32,22 @@ function SavedLocations(props: Props) {
   })
 
 return (
-<div className="saved-container">
-<NavLink to='/'>
-   <button onClick={props.clearInputs}>Home</button>
-</NavLink>
-{all}
-</div>
+  <section className="saved-section">
+
+     <NavLink to='/'>
+     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+      <button onClick={props.clearInputs} className="home-button"><span className="material-symbols-outlined">
+arrow_back
+</span></button>
+    </NavLink>
+
+    {all.length? 
+    <div className="saved-container"> 
+    {all}
+    </div> 
+    : <p className="no-saved">No Saved Locations</p>}
+    
+</section>
 
  )
 }

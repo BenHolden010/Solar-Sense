@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import './savedLocations.css'
 
 interface LocationData {
   name: string;

@@ -16,11 +16,14 @@ const Card = (props: Props) => {
   return (
     
       <div className='card'> 
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
         <h1>{props.locationName}, {props.locationRegion}, {props.locationCountry} </h1>
-        <h1 className="card-temp">{props.temp} °F</h1>
+        {/* <h1 className="card-temp">{props.temp} °F</h1>
         <img src={props.conditionIcon}/>
-        <h1>{props.conditionText}</h1>
-        <NavLink to="${props.locationName}">  <button className="view-location-button">View Location</button> </NavLink>
+        <h1>{props.conditionText}</h1> */}
+        <NavLink to="${props.locationName}">  <button className="view-location-button"><span className="material-symbols-outlined">
+search
+</span></button> </NavLink>
       </div>
     
   ) 

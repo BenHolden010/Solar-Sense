@@ -12,13 +12,12 @@ locationCountry: string;
 conditionText: string;
 conditionIcon: string;
 temp: number;
+
+
 addLocation: () => any;
 }
 
 const FocusCard = (props: Props) => {
-
-
-  
 
 
   return (
@@ -35,6 +34,7 @@ const FocusCard = (props: Props) => {
         <p className="focus-temp">{props.temp} °F</p>
         <img src={props.conditionIcon} className="img"/>
         <h1>{props.conditionText}</h1> 
+      
         <button className="save-button" onClick={props.addLocation}><span className="material-symbols-outlined">
             bookmark</span>
         </button>

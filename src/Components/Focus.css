@@ -48,19 +48,3 @@
     margin-top:-6%
   }
 
-  .saved-container {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
-
-  .saved-section {
-    height:100%;
-    width:100vw
-  }
-
-  .no-saved {
-    color:white;
-    font-size:4vh;
-    margin-left:43%
-  }

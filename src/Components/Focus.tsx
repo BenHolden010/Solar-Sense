@@ -16,12 +16,11 @@ conditionIcon: string;
 temp: number;
 saved: string;
 
-addLocation: () => any;
 toggleSaved: () => any;
 }
 
 const FocusCard = (props: Props) => {
-  console.log(props.saved)
+  // console.log(props.saved)
   const value = useContext(SavedContext)
   return (
    <section className={`focus-section`}>

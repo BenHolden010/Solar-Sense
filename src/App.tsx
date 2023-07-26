@@ -35,7 +35,7 @@ function App() {
   const [savedLocations, setSavedLocations] = useState<LocationData[]>(
     JSON.parse(sessionStorage.getItem("SESSION_STORAGE_KEY") ||'[]'
   ));
-  const [saved, setSaved] = useState('unsaved');
+  const [saved, setSaved] = useState('bookmark');
 
 
   const [savedLocationName, setSavedLocationName] = useState<string>("")
@@ -71,6 +71,15 @@ function App() {
   }
 
   function addLocation() {
+    {!savedLocations.includes({
+      name: locationName, 
+      temp: temp, 
+      region: locationRegion, 
+      country: locationCountry, 
+      icon: conditionIcon, 
+      text: conditionText
+    }) &&
+    
     setSavedLocations(
       [...savedLocations, {
         name: locationName, 
@@ -80,9 +89,9 @@ function App() {
         icon: conditionIcon, 
         text: conditionText
       } ])
-      
+    
   }
-
+}
   // useEffect(() => {
   //   {input && searchCities(input)
   //   .then(data => {
@@ -127,12 +136,24 @@ function App() {
 //     })
 //   }, [savedLocations])
 
+const toggleSaved = () => {
+  const newSaved = saved === 'bookmark' ? 'bookmark_added' : 'bookmark'
+  setSaved(newSaved)
+  setSavedLocations(
+    [...savedLocations, {
+      name: locationName, 
+      temp: temp, 
+      region: locationRegion, 
+      country: locationCountry, 
+      icon: conditionIcon, 
+      text: conditionText
+    } ])
+}
+
   return (
+    <SavedContext.Provider value={saved}>
     <div className="app">
     <Nav />
-    <NavLink to='/saved-locations'>
-            <button>View Saved Locations</button>
-    </NavLink>
       <Routes>
 
         <Route path="/" element={ <div className='app-home'><h2>Select Your Location</h2>
@@ -143,14 +164,14 @@ function App() {
          conditionIcon={conditionIcon} locationRegion={locationRegion} locationCountry={locationCountry} />}
       </section></div>}/>
 
-        <Route path=":location" element={<FocusCard temp={temp} addLocation={addLocation}
+        <Route path={`/location/${locationName}`} element={<FocusCard temp={temp} addLocation={addLocation}
          locationName={locationName}  locationRegion={locationRegion} conditionText={conditionText}
-         conditionIcon={conditionIcon} locationCountry={locationCountry} />}
+         conditionIcon={conditionIcon} locationCountry={locationCountry} toggleSaved={toggleSaved} saved={saved}/>}
          />
         <Route path='/saved-locations' element={<SavedLocations clearInputs={clearInputs} savedLocations={savedLocations} /> } />
       </Routes>
-  
     </div>
+    </SavedContext.Provider>
   )
 }
 

@@ -14,16 +14,17 @@ locationCountry: string;
 conditionText: string;
 conditionIcon: string;
 temp: number;
-
+saved: string;
 
 addLocation: () => any;
 toggleSaved: () => any;
 }
 
 const FocusCard = (props: Props) => {
+  console.log(props.saved)
   const value = useContext(SavedContext)
   return (
-   <section className="focus-section">
+   <section className={`focus-section`}>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
       <NavLink to="/">  <button className="back-button"><span className="material-symbols-outlined">
         arrow_back</span>
@@ -39,8 +40,7 @@ const FocusCard = (props: Props) => {
         <img src={props.conditionIcon} className="img"/>
         <h1>{props.conditionText}</h1> 
       
-        <button className="save-button" onClick={props.toggleSaved}><span className="material-symbols-outlined">
-            bookmark</span>
+        <button className="save-button" onClick={props.toggleSaved}><span className="material-symbols-outlined">{props.saved}</span>
         </button>
         </div>
        

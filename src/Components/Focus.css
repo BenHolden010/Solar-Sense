@@ -3,13 +3,51 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    border: 2px solid black;
+    border: 2px solid white;
     border-radius: 1em;
-    margin-top: 10%;
-    height:70vh;
-    padding-left:5% ;
-    padding-right: 5%;
+    margin-top: 5%;
+    height:63vh;
+    width:27vw;
+    color: white;
+    font-size: 93%;
+    text-shadow: .5px .5px black;
+    margin-left:5%;
+    
   }
+
+  .focus-temp {
+    font-size: 8vh;
+  }
+
+   .save-button {
+    border:none;
+    border-radius: 5px;
+    color: white;
+    background-color: transparent;
+    margin-left: 87%;
+    margin-bottom: -4%;
+   
+  }
+
+  .back-button {
+    margin-left: 49%;
+    margin-top: 8%;
+    background-color: transparent;
+    border:none;
+  }
+
+
+  .focus-section {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .img {
+    margin-top:-6%
+  }
+
+
 
   .light {
     color: black;

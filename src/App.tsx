@@ -38,13 +38,8 @@ function App() {
   const [saved, setSaved] = useState('unsaved');
 
 
-
-  // const [savedTemp,setSavedTemp] = useState<number>(0)
   const [savedLocationName, setSavedLocationName] = useState<string>("")
-  // const [savedLocationRegion,setSavedLocationRegion] = useState<string>("")
-  // const [savedLocationCountry, setSavedLocationCountry] = useState<string>("")
-  // const [savedConditionText, setSavedConditionText] = useState<string>("")
-  // const [savedConditionIcon, setSavedConditionIcon] = useState<string>("")
+
 
 
   useEffect(() => {
@@ -85,6 +80,7 @@ function App() {
         icon: conditionIcon, 
         text: conditionText
       } ])
+      
   }
 
   // useEffect(() => {
@@ -131,45 +127,30 @@ function App() {
 //     })
 //   }, [savedLocations])
 
-const toggleSaved = () => {
-  const newSaved = saved === 'light'? 'dark' : 'light'
-  setSaved(newSaved)
-  setSavedLocations(
-    [...savedLocations, {
-      name: locationName, 
-      temp: temp, 
-      region: locationRegion, 
-      country: locationCountry, 
-      icon: conditionIcon, 
-      text: conditionText
-    } ])
-}
-
   return (
-    <SavedContext.Provider value={saved}>
-      <div className="app">
-      <Nav />
-      <NavLink to='/saved-locations'>
-              <button>View Saved Locations</button>
-      </NavLink>
-        <Routes>
+    <div className="app">
+    <Nav />
+    <NavLink to='/saved-locations'>
+            <button>View Saved Locations</button>
+    </NavLink>
+      <Routes>
 
-          <Route path="/" element={ <div className='app-home'><h2>Select Your Location</h2>
-        <input type="text" placeholder="search for city here" onChange={handleChange} className="search"/>
-        {serverError && <ServerError />}
-        <section className="weather-card-container">
-        {!serverError && locationName && <Card temp={temp} locationName={locationName} conditionText={conditionText}
-          conditionIcon={conditionIcon} locationRegion={locationRegion} locationCountry={locationCountry} />}
-        </section></div>}/>
+        <Route path="/" element={ <div className='app-home'><h2>Select Your Location</h2>
+      <input type="text" placeholder="search for city here" onChange={handleChange} className="search"/>
+      {serverError && <ServerError />}
+      <section className="weather-card-container">
+      {!serverError && locationName && <Card temp={temp} locationName={locationName} conditionText={conditionText}
+         conditionIcon={conditionIcon} locationRegion={locationRegion} locationCountry={locationCountry} />}
+      </section></div>}/>
 
-          <Route path=":location" element={<FocusCard temp={temp} addLocation={addLocation}
-          locationName={locationName}  locationRegion={locationRegion} conditionText={conditionText}
-          conditionIcon={conditionIcon} locationCountry={locationCountry} toggleSaved={toggleSaved} />}
-          />
-          <Route path='/saved-locations' element={<SavedLocations clearInputs={clearInputs} savedLocations={savedLocations} /> } />
-        </Routes>
-      </div>
-    </SavedContext.Provider>
+        <Route path=":location" element={<FocusCard temp={temp} addLocation={addLocation}
+         locationName={locationName}  locationRegion={locationRegion} conditionText={conditionText}
+         conditionIcon={conditionIcon} locationCountry={locationCountry} />}
+         />
+        <Route path='/saved-locations' element={<SavedLocations clearInputs={clearInputs} savedLocations={savedLocations} /> } />
+      </Routes>
+  
+    </div>
   )
 }
 

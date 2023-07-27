@@ -1,10 +1,6 @@
-// import React from "react";
 import './Focus.css'
 import {NavLink} from 'react-router-dom'
-import SavedLocations from "./SavedLocations";
-import { FunctionExpression } from "typescript";
-import { useState, useContext } from "react";
-import SavedContext from './savedContext';
+
 
 
 interface Props {
@@ -20,8 +16,7 @@ toggleSaved: () => any;
 }
 
 const FocusCard = (props: Props) => {
-  // console.log(props.saved)
-  const value = useContext(SavedContext)
+
   return (
    <section className={`focus-section`}>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />

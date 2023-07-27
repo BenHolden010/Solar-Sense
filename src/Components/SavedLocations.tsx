@@ -1,4 +1,3 @@
-import React from "react";
 import { NavLink } from "react-router-dom";
 import './savedLocations.css'
 
@@ -13,7 +12,6 @@ interface LocationData {
 
 interface Props {
   savedLocations: LocationData[];
-  clearInputs: () => void;
 }
 
 function SavedLocations(props: Props) {
@@ -36,7 +34,7 @@ return (
 
      <NavLink to='/'>
      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-      <button onClick={props.clearInputs} className="home-button"><span className="material-symbols-outlined">
+      <button className="home-button"><span className="material-symbols-outlined">
 arrow_back
 </span></button>
     </NavLink>

@@ -5,9 +5,10 @@ import { useState, useEffect } from 'react';
 import Card from "./Components/Card";
 import FocusCard from "./Components/Focus"
 import Nav from "./Components/Nav"
-import {Routes, Route } from 'react-router-dom'
+import {Routes, Route, Navigate } from 'react-router-dom'
 import ServerError from './Components/ServerError';
 import SavedLocations from './Components/SavedLocations';
+import PageNotFound from './Components/PageNotFound';
 
 type LocationData = {
   name: string;
@@ -114,6 +115,8 @@ const toggleSaved = () => {
          conditionIcon={conditionIcon} locationCountry={locationCountry} toggleSaved={toggleSaved} saved={saved}/>}
          />
         <Route path='/saved-locations' element={<SavedLocations clearInputs={clearInputs} savedLocations={savedLocations} /> } />
+        <Route path="/404" element={<PageNotFound/>}/>
+        <Route path="*" element={<Navigate to= "/404"/>}/>
       </Routes>
     </div>
   )

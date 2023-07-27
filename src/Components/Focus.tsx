@@ -1,9 +1,6 @@
-// import React from "react";
 import './Focus.css'
 import {NavLink} from 'react-router-dom'
-import SavedLocations from "./SavedLocations";
-import { FunctionExpression } from "typescript";
-import { useState, useContext } from "react";
+
 
 
 interface Props {

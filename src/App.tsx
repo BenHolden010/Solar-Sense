@@ -27,13 +27,12 @@ function App() {
   const [temp, setTemp] = useState<number>(0)
   const [conditionText, setConditionText] = useState<string>('')
   const [conditionIcon, setConditionIcon] = useState<string>('')
-  const [locations, setLocations] =useState<{}[]>([])
   const [serverError, setServerError] = useState<boolean>(false)
+  const [saved, setSaved] = useState('bookmark');
   const [savedLocations, setSavedLocations] = useState<LocationData[]>(
     JSON.parse(sessionStorage.getItem("SESSION_STORAGE_KEY") ||'[]'
   ));
-  const [saved, setSaved] = useState('bookmark');
-  const [savedLocationName, setSavedLocationName] = useState<string>("")
+
 
   useEffect(() => {
     const data = window.sessionStorage.getItem("SESSION_STORAGE_KEY")
@@ -46,14 +45,6 @@ function App() {
       window.sessionStorage.setItem("SESSION_STORAGE_KEY", JSON.stringify(savedLocations))
     }
   }, [savedLocations])
-
-  function clearInputs() {
-    if(!input){
-      return(
-        <div className="weather-card-container"></div>
-      )
-    }
-  }
 
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
     setInput(event.target.value)
@@ -114,7 +105,7 @@ const toggleSaved = () => {
          locationName={locationName}  locationRegion={locationRegion} conditionText={conditionText}
          conditionIcon={conditionIcon} locationCountry={locationCountry} toggleSaved={toggleSaved} saved={saved}/>}
          />
-        <Route path='/saved-locations' element={<SavedLocations clearInputs={clearInputs} savedLocations={savedLocations} /> } />
+        <Route path='/saved-locations' element={<SavedLocations savedLocations={savedLocations} /> } />
         <Route path="/404" element={<PageNotFound/>}/>
         <Route path="*" element={<Navigate to= "/404"/>}/>
       </Routes>

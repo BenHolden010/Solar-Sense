@@ -1,0 +1,33 @@
+@media screen and (max-width: 1050px) {
+    .app {
+        
+        padding-bottom: 51%;
+        
+      }
+  }
+  
+  @media screen and (max-width: 870px) {
+  
+  }
+  
+  @media screen and (max-width: 750px) {
+   .search {
+    width:30vw
+   }
+  }
+  
+  @media screen and (max-width: 690px) {
+   
+  }
+  
+  @media screen and (max-width: 575px) {
+   
+  }
+  
+  @media screen and (max-width: 539px) {
+    
+  }
+  
+  @media screen and (max-width: 575px) {
+   
+  }

@@ -10,6 +10,7 @@ import ServerError from './Components/ServerError';
 import SavedLocations from './Components/SavedLocations';
 import PageNotFound from './Components/PageNotFound';
 
+
 type LocationData = {
   name: string;
   temp: number;

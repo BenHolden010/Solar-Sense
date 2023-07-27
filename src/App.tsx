@@ -1,17 +1,13 @@
 import React, { ChangeEvent } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { getCity }from './ApiCalls'
 import { useState, useEffect } from 'react';
 import Card from "./Components/Card";
 import FocusCard from "./Components/Focus"
 import Nav from "./Components/Nav"
-import {Routes, Route, NavLink} from 'react-router-dom'
+import {Routes, Route } from 'react-router-dom'
 import ServerError from './Components/ServerError';
 import SavedLocations from './Components/SavedLocations';
-import { clear } from 'console';
-import SavedContext from './Components/savedContext';
-
 
 type LocationData = {
   name: string;
@@ -36,15 +32,10 @@ function App() {
     JSON.parse(sessionStorage.getItem("SESSION_STORAGE_KEY") ||'[]'
   ));
   const [saved, setSaved] = useState('bookmark');
-
-
   const [savedLocationName, setSavedLocationName] = useState<string>("")
-
-
 
   useEffect(() => {
     const data = window.sessionStorage.getItem("SESSION_STORAGE_KEY")
-    // console.log('DATA', data)
     if (data !== null) setSavedLocations(JSON.parse(data))
   },[])
 
@@ -54,9 +45,6 @@ function App() {
       window.sessionStorage.setItem("SESSION_STORAGE_KEY", JSON.stringify(savedLocations))
     }
   }, [savedLocations])
-
-  // const [savedIdentity, setSavedIdentity] = useState(JSON.parse(sessionStorage.getItem("savedIdentity")) || [])
-
 
   function clearInputs() {
     if(!input){
@@ -70,31 +58,10 @@ function App() {
     setInput(event.target.value)
   }
 
-//   function addLocation() {
-//     setSavedLocations(
-//       [...savedLocations, {
-//         name: locationName, 
-//         temp: temp, 
-//         region: locationRegion, 
-//         country: locationCountry, 
-//         icon: conditionIcon, 
-//         text: conditionText
-//       } ])
-// }
-
-const removeLocation = (name) => {
+const removeLocation = (name:string) => {
   const filteredSavedLocations = savedLocations.filter((location) => location.name !== name);
   setSavedLocations(filteredSavedLocations);
 };
-  // useEffect(() => {
-  //   {input && searchCities(input)
-  //   .then(data => {
-  //     setLocations(data)
-  //     setServerError(false)
-  //   })
-  //   .catch(error => setServerError(true))
-  //   }
-  // }, [input])
 
   useEffect(() => {
     {input && getCity(input)
@@ -113,25 +80,6 @@ const removeLocation = (name) => {
   }
   }, [input])
 
-  
-//    useEffect(() => {
-    
-//      savedLocations.map(location => {
-// console.log(location)
-//     {savedLocations && getCity(location?.name)
-//     .then(data => {
-//       setSavedTemp(data?.current?.temp_f)
-//       setSavedLocationName(data?.location?.name)
-//       setSavedLocationRegion(data?.location?.region)
-//       setSavedLocationCountry(data?.location?.country)
-//       setSavedConditionText(data?.current?.condition?.text)
-//       setSavedConditionIcon(data?.current?.condition?.icon)
-//     })
-//     .catch(error => setServerError(true))
-//   }
-//     })
-//   }, [savedLocations])
-
 const toggleSaved = () => {
   const newSaved = saved === 'bookmark' ? 'bookmark_added' : 'bookmark'
   setSaved(newSaved)
@@ -149,7 +97,6 @@ const toggleSaved = () => {
 }
 
   return (
-    <SavedContext.Provider value={saved}>
     <div className="app">
     <Nav />
       <Routes>
@@ -169,7 +116,6 @@ const toggleSaved = () => {
         <Route path='/saved-locations' element={<SavedLocations clearInputs={clearInputs} savedLocations={savedLocations} /> } />
       </Routes>
     </div>
-    </SavedContext.Provider>
   )
 }
 

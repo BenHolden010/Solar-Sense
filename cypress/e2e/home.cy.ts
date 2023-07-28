@@ -30,16 +30,28 @@ describe('Home Page', () => {
   
   it('user sees a Form with an input field on the home page', () => {
     cy.get('nav').should('be.visible')
-      .get('.title').contains("h1",'Solar Sense')
-      .get('.view-saved-button')
-      .get('h2').contains('Select Your Location')
-      .get('input').should("be.visible")
+    .url().should('include', '/')
+    .get('.title').contains("h1",'Solar Sense')
+    .get('.view-saved-button')
+    .get('h2').contains('Select Your Location')
+    .get('input').should("be.visible")
   });
   
   it('user sees the input, types a City, and sees the info card', () => {
-    expect(true).to.equal(true)
     cy.get('input').type('Denver')
-      .get(".card").contains("h1", "Denver, Colorado, United States")
+    .get(".card").contains("h1", "Denver, Colorado, United States")
   });
 
+  it('should display 404 error message when route is not recognized', () => {
+    cy.visit('http://localhost:3000/denverweather')
+    .get('.error-page').contains('h1', '404 page not found')
+    .get('.error-to-home').contains('p', 'Please try again')
+    .get('.try-again').click()
+    .url().should('include', '/')
+  })
+
+  it('should display error message when a non valid location is typed', () => {
+    cy.get('input').type('De').should('have.value', 'De')
+    .get('div').contains('p', 'Please enter a valid location.')
+  })
 });  

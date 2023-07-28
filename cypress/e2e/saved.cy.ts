@@ -1,12 +1,5 @@
-// describe('template spec', () => {
-//   it('passes', () => {
-//     cy.visit('https://example.cypress.io')
-//   })
-// })
-
 describe('saved locations section', () => {
   beforeEach(()=>{
-    // visit localhost
     cy.intercept('GET', 'https://api.weatherapi.com/v1/forecast.json?key=46ac1049aa534aed954140046231907&q=&days=3&aqi=yes&alerts=no', {
       statusCode: 200,
     })
@@ -36,8 +29,17 @@ describe('saved locations section', () => {
     cy.get('input').type('Denver')
     .get('.card').should('be.visible')
     .get('.view-location-button').click()
+    .url().should('include', '/Denver')
     .get('.save-button').click()
     .get('.view-saved-button').click()
+    .url().should('include', '/saved-locations')
     .get('.saved-card').should('be.visible')
+    .get('.saved-card').contains('h1', 'Denver, Colorado, United States')
+    .get('.saved-temp').contains('h1', '72.5 °F')
+    .get('img').should('have.attr', 'src').should('include', '//cdn.weatherapi.com/weather/64x64/day/116.png')
+    .get('.saved-card').contains('h1', 'Partly cloudy')
+    .get('#Denver').click()
+    .get('.no-saved').contains('p', 'No Saved Locations')
+    .get('.saved-card').should('not.exist')
   })
 })

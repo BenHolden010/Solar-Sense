@@ -28,19 +28,21 @@ describe('Focus Page', () => {
     })
 
     it('should return to home page when back button is clicked', () => {
-      cy.get('input').type('Denver')
+      cy.get('input').type('Denver').should('have.value', 'Denver')
         .get('.view-location-button').click()
+        .url().should('include', '/Denver')
         .get(".back-button").click()
-        .get("input")
+        .url().should('include', '/')
+        .get("input").should('be.visible')
     });
 
     it('should display the selected location information', () => {
-      cy.get('input').type('Denver')
+      cy.get('input').type('Denver').should('have.value', 'Denver')
         .get('.view-location-button').click()
-        .get(".focus-section")
+        .get(".focus-section").should('be.visible')
         .get(".focus-card").first().contains("h1","Denver, Colorado, United States" )
         .get(".focus-card").contains("p","72.5 °F" )
         .get(".focus-card").contains("h1","Partly cloudy")
-        .get(".save-button")
+        .get(".save-button").should('be.visible')
     });
 })

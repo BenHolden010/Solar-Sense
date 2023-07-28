@@ -7,7 +7,7 @@
     border-radius: 1em;
     margin-top: 5%;
     height:63vh;
-    width:27vw;
+    width:32vw;
     color: white;
     font-size: 93%;
     text-shadow: .5px .5px black;
@@ -47,3 +47,76 @@
     margin-top:-6%
   }
 
+
+  @media screen and (max-width: 1280px) {
+    .focus-card {
+     
+      width:45vw;
+      margin-left:3%;
+    }
+  }
+
+  @media screen and (max-width: 980px) {
+    .focus-card {
+     
+      width:52vw;
+      margin-left:3%;
+    }
+  
+  }
+  @media screen and (max-width: 870px) {
+    .focus-card {
+      width:56vw;
+      margin-left:1%;
+    }
+  
+}
+@media screen and (max-width: 750px) {
+  .focus-card {
+    width:64vw;
+    margin-left:1%;
+  }
+   
+}
+
+@media screen and (max-width: 605px) {
+  .focus-card {
+    width:70vw;
+    margin-left:1%;
+  }
+   
+}
+
+@media screen and (max-width: 550px) {
+  .focus-card {
+    width:79vw;
+    margin-left:1%;
+  }
+  
+}
+
+@media screen and (max-width: 473px) {
+  .focus-card {
+    width:82vw;
+    margin-left:1%;
+  }
+   
+}
+
+@media screen and (max-width: 414px) {
+  .focus-card {
+    width:85vw;
+    margin-left:0%;
+    padding-left: 2vw;
+    padding-right:2%;
+  }
+   
+  
+  }
+
+@media screen and (max-width: 390px) {
+  .focus-card {
+    padding-left: 2vw;
+    padding-right:2%
+  }
+}

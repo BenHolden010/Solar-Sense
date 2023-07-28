@@ -38,6 +38,7 @@
   cursor: pointer;
   background: transparent;
   border: none;
+  color: white;
 }
 
 .saved-card {

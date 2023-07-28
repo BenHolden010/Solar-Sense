@@ -82,11 +82,20 @@ const toggleSaved = () => {
       region: locationRegion, 
       country: locationCountry, 
       icon: conditionIcon, 
-      text: conditionText
+      text: conditionText,
     } ])
   }
   { saved === 'bookmark_added' && removeLocation(locationName)}
 }
+const deleteSaved: React.MouseEventHandler<HTMLButtonElement> = (event) => {
+  const target = event.target as HTMLButtonElement;
+  if (target && target.id) {
+    let filterSaved = savedLocations.filter(location => location.name !== target.id);
+    setSavedLocations(filterSaved);
+    setSaved('bookmark')
+  }
+};
+
 
   return (
     <div className="app">
@@ -105,7 +114,7 @@ const toggleSaved = () => {
          locationName={locationName}  locationRegion={locationRegion} conditionText={conditionText}
          conditionIcon={conditionIcon} locationCountry={locationCountry} toggleSaved={toggleSaved} saved={saved}/>}
          />
-        <Route path='/saved-locations' element={<SavedLocations savedLocations={savedLocations} /> } />
+        <Route path='/saved-locations' element={<SavedLocations deleteSaved={deleteSaved} savedLocations={savedLocations} /> } />
         <Route path="/404" element={<PageNotFound/>}/>
         <Route path="*" element={<Navigate to= "/404"/>}/>
       </Routes>

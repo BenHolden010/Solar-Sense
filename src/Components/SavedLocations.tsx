@@ -12,6 +12,7 @@ interface LocationData {
 
 interface Props {
   savedLocations: LocationData[];
+  deleteSaved: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 function SavedLocations(props: Props) {
@@ -20,11 +21,12 @@ function SavedLocations(props: Props) {
  
     return (
 
-      <div className='saved-card'> 
+      <div className='saved-card' > 
         <h1>{location.name}, {location.region}, {location.country === "United States of America" ? "United States" : location.country}</h1>
         <h1 className="saved-temp">{location.temp} °F</h1>
         <img src={location.icon}/>
         <h1>{location.text}</h1>
+        <button onClick={props.deleteSaved} id={location.name}>Delete</button>
       </div>
     )
   })

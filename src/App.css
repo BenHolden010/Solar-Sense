@@ -1,63 +1,62 @@
 .app {
-  /* text-align: center; */
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   background-image: linear-gradient(rgb(153, 176, 229), darkBlue);
   padding-bottom: 41%;
-  
 }
+
 .app-home {
-  /* text-align: center; */
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  color:white;
+  color: white;
   margin-top: 5%;
-  margin-left:3%
+  margin-left: 3%
 }
 
 .search {
-  margin-bottom:10% ;
-  height:5vh;
-  width:20vw;
+  margin-bottom: 10%;
+  height: 5vh;
+  width: 20vw;
   border-radius: 5px;
   border: none;
 }
 
-
-
 @media screen and (max-width: 1050px) {
   .app {
-      padding-bottom: 61%;
-    }
-    .search {
-      width:30vw
-     }
+    padding-bottom: 61%;
+  }
+
+  .search {
+    width: 30vw
+  }
 }
 
 @media screen and (max-width: 870px) {
   .app-home {
     margin-top: 10%;
   }
+
   .search {
-    width:35vw
-   }
+    width: 35vw
+  }
 }
 
 @media screen and (max-width: 750px) {
- .search {
-  width:40vw
- }
+  .search {
+    width: 40vw
+  }
 
- .app {
-  padding-bottom: 85%;
-}
-.app-home {
-  margin-top: 13%;
-}
+  .app {
+    padding-bottom: 85%;
+  }
+
+  .app-home {
+    margin-top: 13%;
+  }
 }
 
 @media screen and (max-width: 690px) {
@@ -70,10 +69,12 @@
   .app {
     padding-bottom: 95%;
   }
+
   .search {
-    width:40vw
-   }
-   .app-home {
+    width: 40vw
+  }
+
+  .app-home {
     margin-top: 21%;
   }
 }
@@ -96,11 +97,10 @@
   }
 
   .search {
-    width:50vw
-   }
-
-   .app-home {
-    margin-top: 25%;
+    width: 50vw
   }
 
+  .app-home {
+    margin-top: 25%;
+  }
 }

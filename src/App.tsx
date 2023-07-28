@@ -98,27 +98,25 @@ const deleteSaved: React.MouseEventHandler<HTMLButtonElement> = (event) => {
   }
 };
 
-
   return (
     <div className="app">
-    <Nav />
+      <Nav />
       <Routes>
-
-        <Route path="/" element={ <div className='app-home'><h2>Select Your Location</h2>
-      <input type="text" placeholder="search for city here" onChange={handleChange} className="search"/>
-      {serverError && <ServerError />}
-      <section className="weather-card-container">
-      {!serverError && locationName && <Card temp={temp} locationName={locationName} conditionText={conditionText}
-         conditionIcon={conditionIcon} locationRegion={locationRegion} locationCountry={locationCountry} />}
-      </section></div>}/>
+        <Route path="/" element={<div className='app-home'><h2>Select Your Location</h2>
+          <input type="text" placeholder="search for city here" onChange={handleChange} className="search" />
+          {serverError && <ServerError />}
+          <section className="weather-card-container">
+            {!serverError && locationName && <Card temp={temp} locationName={locationName} conditionText={conditionText}
+              conditionIcon={conditionIcon} locationRegion={locationRegion} locationCountry={locationCountry} />}
+          </section></div>} />
 
         <Route path={`/location/${locationName}`} element={<FocusCard temp={temp}
-         locationName={locationName}  locationRegion={locationRegion} conditionText={conditionText}
-         conditionIcon={conditionIcon} locationCountry={locationCountry} toggleSaved={toggleSaved} saved={saved}/>}
-         />
-        <Route path='/saved-locations' element={<SavedLocations deleteSaved={deleteSaved} savedLocations={savedLocations} /> } />
-        <Route path="/404" element={<PageNotFound/>}/>
-        <Route path="*" element={<Navigate to= "/404"/>}/>
+          locationName={locationName} locationRegion={locationRegion} conditionText={conditionText}
+          conditionIcon={conditionIcon} locationCountry={locationCountry} toggleSaved={toggleSaved} saved={saved} />}
+        />
+        <Route path='/saved-locations' element={<SavedLocations deleteSaved={deleteSaved} savedLocations={savedLocations} />} />
+        <Route path="/404" element={<PageNotFound />} />
+        <Route path="*" element={<Navigate to="/404" />} />
       </Routes>
     </div>
   )

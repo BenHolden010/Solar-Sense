@@ -28,6 +28,11 @@
         margin-bottom: 2%;
       }
 
+      .remove-saved {
+        background: transparent;
+        border:none;
+      }
+
       .saved-card {
         display:flex;
         justify-content: center;

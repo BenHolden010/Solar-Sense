@@ -89,6 +89,7 @@ const toggleSaved = () => {
   { saved === 'bookmark_added' && removeLocation(locationName)}
 }
 const deleteSaved: React.MouseEventHandler<HTMLButtonElement> = (event) => {
+  console.log(event.target)
   const target = event.target as HTMLButtonElement;
   if (target && target.id) {
     let filterSaved = savedLocations.filter(location => location.name !== target.id);

@@ -12,7 +12,9 @@ export default function Nav() {
           <h1 className="title">Solar Sense</h1>
           <NavLink to='/saved-locations'>
             <button className="view-saved-button"><span className="material-symbols-outlined">
-dehaze
+           
+bookmarks
+
 </span></button>
     </NavLink>
         </nav>

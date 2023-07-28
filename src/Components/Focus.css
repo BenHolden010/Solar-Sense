@@ -11,14 +11,19 @@
   color: white;
   font-size: 93%;
   text-shadow: .5px .5px black;
-  margin-left: 5%;
 }
 
 .focus-temp {
   font-size: 8vh;
 }
 
+.focus-section-nav {
+  display: flex;
+  justify-content: center;
+}
+
 .save-button {
+  cursor: pointer;
   border: none;
   border-radius: 5px;
   color: white;
@@ -28,12 +33,11 @@
 }
 
 .back-button {
-  margin-left: 49%;
-  margin-top: 8%;
+  cursor: pointer;
+  margin-top: 32px;
   background-color: transparent;
   border: none;
 }
-
 
 .focus-section {
   display: flex;

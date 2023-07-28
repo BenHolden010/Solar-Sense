@@ -31,11 +31,12 @@ function SavedLocations(props: Props) {
 
   return (
     <section className="saved-section">
-
-      <NavLink to='/'>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-        <button className="home-button"><span className="material-symbols-outlined">home</span></button>
-      </NavLink>
+      <div className="saved-section-nav">
+        <NavLink to='/'>
+          <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+          <button className="home-button"><span className="material-symbols-outlined">home</span></button>
+        </NavLink>
+      </div>
       {all.length ?
         <div className="saved-container">
           {all}

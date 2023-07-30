@@ -47,4 +47,4 @@
 2. After cloning it down, `cd` into the project and run `npm install`
 3. Once the installation is done, you can now run `npm start` to run the application in your web browser
 ### or...
-Click this [link]() to visit the application on your web browser!
+Click this [link](https://solarsense-turing.vercel.app/) to visit the application on your web browser!

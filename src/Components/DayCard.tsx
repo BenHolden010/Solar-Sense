@@ -26,28 +26,40 @@ type Hours = {
 
 function DayCard({date, maxtemp_f, mintemp_f, totalprecip_in, totalsnow_cm, daily_chance_of_rain, 
   daily_chance_of_snow, conditionText, conditionIcon, sunrise, sunset, hour}:DayProps){
-    let snowInches = totalsnow_cm * 2.54
-    let displayedHours = hour.map(hour=>{
-      console.log(hour)
-      return(<HourCard 
-        time={hour.time} 
-        conditionText={hour.condition.text} 
-        conditionIcon={hour.condition.icon} 
-        />)
-    })
+  
+  let snowInches = totalsnow_cm / 2.54
+  let newHours: Hours[] = [...hour];
+  const shiftAndPush = (array: Hours[]) => {
+      const shiftedElement = array.shift();
+      if (shiftedElement) {
+          array.push(shiftedElement);
+      }
+  };
+
+    for (let i = 0; i < 6; i++) {
+      shiftAndPush(newHours);
+  }
+    
+  let displayedHours = newHours.map(hour=>{
+    return(<HourCard 
+      time={hour.time} 
+      conditionText={hour.condition.text} 
+      conditionIcon={hour.condition.icon} 
+      />)
+  })
+
+
   return (
   <div className="day-card">
-    <h1>{date}</h1>
     <div className="condition-ti">
-      <p>{conditionText}</p>
+    <h1>{date}</h1> 
+      <h2>{conditionText}</h2>
       <img src={conditionIcon} className="img"/>
+    <h2>High: {Math.floor(maxtemp_f)}°F<br/>Low: {Math.floor(mintemp_f)}°F</h2>
     </div>
-    <p>High: {maxtemp_f}F/Low: {mintemp_f}F</p>
-    <p>{daily_chance_of_rain}% Chance Of Rain</p>
-    <p>{totalprecip_in} Inches Total Rain</p>
-    <p>{daily_chance_of_snow}% Chance Of Snow</p>
-    <p>{snowInches} Inches Total Snow</p>
-    <p>{sunrise} sunrise<br/>{sunset} sunset</p>
+    <h2 className="rise-set">{sunrise} ☀️↑ <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExbTN3cGt5YnVkcHozdjNzejVwNG5kNWRzemh2Zjc3MjNwczdqeGt0YSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/loUqCMSfXHcsVb3cUZ/giphy.gif" className="giphy-img" alt="Giphy Image" />{sunset} ☀️↓</h2>
+    {daily_chance_of_rain>0&&<h2>🌧️ {daily_chance_of_rain}% Chance Of Rain with a total of {totalprecip_in} Inches 🌧️</h2>}
+    {daily_chance_of_snow>0&&<h2>❄️ {daily_chance_of_snow}% Chance Of Snow with a total of {snowInches} Inches ❄️</h2>}
     <div className="hours-container">{displayedHours}</div>
   </div>)
 }

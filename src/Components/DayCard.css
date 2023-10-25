@@ -1,4 +1,4 @@
-p {
+h2, p {
   margin: 0
 }
 
@@ -11,9 +11,22 @@ p {
   padding: 1em;
 }
 
-.img{
-  height: 5em;
-  width: 5em;
+.img {
+  width: 4em;
+  height: 4em;
+}
+
+.rise-set {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.giphy-img {
+  width: 3em;
+  height: 3em;
+  border-radius: 1em;
+  padding: 0em;
 }
 
 .condition-ti {
@@ -27,8 +40,19 @@ p {
 }
 
 .hours-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(12,1fr);
+  justify-content: center;
+  grid-gap: 8px;
+  width: 70vw;
+}
+
+@media screen and (max-width: 1050px) {
+  .hours-container {
+    display: grid;
+    grid-template-columns: repeat( 6, 1fr);
+    justify-content: space-around;
+    grid-gap: 8px;
+    width: 70vw;
+  }
 }

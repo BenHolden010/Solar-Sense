@@ -1,6 +1,28 @@
 .hour-card{
   background-color: white;
-  border-radius: 1em;
-  width: 4em;
-  height: 5em;
+  border-radius: .5em;
+  border: 1px solid black;
+  width: 5vw;
+  height: 6vw;
+}
+
+.hour-img{
+  width: 5vw;
+  height: 5vw;
+}
+
+ @media screen and (max-width: 1050px) {
+  .hour-card{
+  width: 10vw;
+  height: 12vw;
+  }
+  .hour-img{
+  width: 10vw;
+  height: 10vw;
+  }
+}
+ @media screen and (max-width: 450px) {
+p, h2{
+  font-size: .7em;
+}
 }

@@ -28,15 +28,14 @@ export default function HourCard({time,conditionText,conditionIcon}:HourProps){
   if(translatedTime === "17:00"){translatedTime = "5PM"}
   if(translatedTime === "18:00"){translatedTime = "6PM"}
   if(translatedTime === "19:00"){translatedTime = "7PM"}
-  if(translatedTime ==="20:00"){translatedTime = "8PM"}
+  if(translatedTime === "20:00"){translatedTime = "8PM"}
   if(translatedTime === "21:00"){translatedTime = "9PM"}
   if(translatedTime === "22:00"){translatedTime = "10PM"}
   if(translatedTime === "23:00"){translatedTime = "11PM"}
-  console.log(translatedTime)
   return (
     <div className="hour-card">
     <p>{translatedTime}</p>
-    <img src={conditionIcon} alt={conditionText}/>
+    <img className="hour-img" src={conditionIcon} alt={conditionText}/>
     </div>
   )
 }

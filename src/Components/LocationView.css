@@ -19,17 +19,13 @@
   border-radius: 1em;
   border: 2px solid black;
   width: 70vw;
+  font-size: .7em;
 }
 
 .days-container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(1, 1fr);
   grid-gap: 20px;
-}
-
-.focus-card-title {
-  font-size: 3em;
-  margin-bottom: 0em;
 }
 
 .focus-temp {
@@ -71,10 +67,10 @@
   flex-direction: column;
 }
 
-@media screen and (max-width: 1050px) {
+/* @media screen and (max-width: 1050px) {
   .days-container {
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
   }
-}
+} */

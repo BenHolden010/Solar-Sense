@@ -17,8 +17,13 @@
 }
 
 .title {
-    font-size: 4vh;
+    display: flex;
+    font-size: 6vh;
     text-shadow: .5px .5px black;
+}
+
+.black{
+  color: black
 }
 
 .view-saved-button {

@@ -25,5 +25,8 @@
     cursor: pointer;
     background-color: transparent;
     border: none;
-    color: white
+    color: white;
+    background-color: #606ec4;
+    border-radius: 1em;
+    padding: 0.5em;
 }

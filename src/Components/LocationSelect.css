@@ -1,7 +1,4 @@
 .location-select {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   border: 2px solid white;
   border-radius: 1em;
   width: 80vw;

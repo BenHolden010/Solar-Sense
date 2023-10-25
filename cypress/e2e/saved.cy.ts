@@ -27,7 +27,7 @@ describe('saved locations section', () => {
 
   it('should allow the user to save a location and view the saved location', () => {
     cy.get('input').type('Denver')
-    .get('.card').should('be.visible')
+    .get('.location-select').should('be.visible')
     .get('.view-location-button').click()
     .url().should('include', '/Denver')
     .get('.save-button').click()

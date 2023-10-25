@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from 'react';
+import { ChangeEvent } from 'react';
 import './App.css';
 import { getCity }from './ApiCalls'
 import { useState, useEffect } from 'react';
@@ -85,6 +85,23 @@ function App() {
     setSavedLocations(filteredSavedLocations);
   };
 
+  const selectLocation = (name: string) => {
+    getCity(name)
+      .then(data => {
+        setTemp(data.current.temp_f)
+        setLocationName(data.location.name)
+        setLocationRegion(data.location.region)
+        setLocationCountry(data.location.country)
+        setConditionText(data.current.condition.text)
+        setConditionIcon(data.current.condition.icon)
+        setDays(data.forecast.forecastday)
+        setServerError(false)
+        setSaved('bookmark')
+        {savedLocations.some(location=>location.name===data.location.name) && setSaved('bookmark_added')}
+      })
+      .catch(error => setServerError(true))
+  }
+
   useEffect(() => {
     {input && getCity(input)
       .then(data => {
@@ -119,14 +136,11 @@ function App() {
     }
     { saved === 'bookmark_added' && removeLocation(locationName)}
   }
-
-  const deleteSaved: React.MouseEventHandler<HTMLButtonElement> = (event) => {
-    const target = event.target as HTMLButtonElement;
-    if (target && target.id) {
-      let filterSaved = savedLocations.filter(location => location.name !== target.id);
-      setSavedLocations(filterSaved);
-      setSaved('bookmark')
-    }
+  console.log(input)
+  const deleteSaved = (name: string) => {
+    const filteredSavedLocations = savedLocations.filter(location => location.name !== name);
+    setSavedLocations(filteredSavedLocations);
+    setSaved('bookmark');
   };
   return (
     <div className="App">
@@ -139,17 +153,17 @@ function App() {
             {!serverError && locationName && <LocationSelect days={days} temp={temp} locationName={locationName}
              conditionText={conditionText} conditionIcon={conditionIcon} locationRegion={locationRegion}
               locationCountry={locationCountry} />}
-          </section></div>} />
+          </section></div>} />fdgsdf vcsvc 
 
         <Route path={`/location/${locationName}`} element={<LocationView temp={temp} days={days}
           locationName={locationName} locationRegion={locationRegion} conditionText={conditionText}
           conditionIcon={conditionIcon} locationCountry={locationCountry} toggleSaved={toggleSaved}
-           saved={saved} />}
+           saved={saved} selectLocation={selectLocation}/>}
         />
         <Route path='/saved-locations' element={<SavedLocations deleteSaved={deleteSaved} 
-        savedLocations={savedLocations} />} />
+        savedLocations={savedLocations} selectLocation={selectLocation}/>} />
         <Route path="/404" element={<PageNotFound />} />
-        <Route path="*" element={<Navigate to="/404" />} />
+        {/* <Route path="*" element={<Navigate to="/404" />} /> */}
       </Routes>
     </div>
   )

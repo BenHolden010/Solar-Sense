@@ -19,9 +19,16 @@ p {
 .condition-ti {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
   background-color: #707298;
   border-radius: 1em;
   border: 2px solid black;
   color: white;
+}
+
+.hours-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
 }

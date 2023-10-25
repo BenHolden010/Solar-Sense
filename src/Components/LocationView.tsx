@@ -43,7 +43,7 @@ type Hours = {
   }
 }
 
-const LocationView = ({ days, temp, locationName, conditionText, conditionIcon, locationRegion, toggleSaved, saved, locationCountry }: LocationViewProps) => {
+const LocationView = ({ days, temp, locationName, conditionText, conditionIcon, locationRegion, toggleSaved, saved, locationCountry}: LocationViewProps) => {
   console.log(days)
   let displayedDays = days?.map(day=>{
     return (
@@ -60,6 +60,7 @@ const LocationView = ({ days, temp, locationName, conditionText, conditionIcon, 
       conditionIcon={day.day.condition.icon}
       sunrise={day.astro.sunrise}
       sunset={day.astro.sunset}
+      hour={day.hour}
       />
       )
     })

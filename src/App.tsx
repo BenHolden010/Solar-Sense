@@ -136,12 +136,13 @@ function App() {
     }
     { saved === 'bookmark_added' && removeLocation(locationName)}
   }
-  console.log(input)
+ 
   const deleteSaved = (name: string) => {
     const filteredSavedLocations = savedLocations.filter(location => location.name !== name);
     setSavedLocations(filteredSavedLocations);
     setSaved('bookmark');
   };
+
   return (
     <div className="App">
       <Nav/>
@@ -163,7 +164,7 @@ function App() {
         <Route path='/saved-locations' element={<SavedLocations deleteSaved={deleteSaved} 
         savedLocations={savedLocations} selectLocation={selectLocation}/>} />
         <Route path="/404" element={<PageNotFound />} />
-        {/* <Route path="*" element={<Navigate to="/404" />} /> */}
+        {/* <Route path="*" element={<Navigate to="/404" />} /> This code doesnt work with the dynamic rendering of the saved locations page*/}
       </Routes>
     </div>
   )

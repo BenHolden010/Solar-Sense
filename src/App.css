@@ -1,106 +1,25 @@
-.app {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+.App {
+  text-align: center;
   background-image: linear-gradient(rgb(153, 176, 229), darkBlue);
-  padding-bottom: 41%;
-}
-
-.app-home {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+  min-height: 100vh;
   color: white;
-  margin-top: 5%;
-  /* margin-left: 3% */
 }
 
 .search {
-  margin-bottom: 10%;
+  margin-bottom: 2em;
   height: 5vh;
   width: 20vw;
   border-radius: 5px;
   border: none;
 }
 
-@media screen and (max-width: 1050px) {
-  .app {
-    padding-bottom: 61%;
-  }
-
-  .search {
-    width: 30vw
-  }
+.weather-card-container {
+  display: flex;
+  justify-content: center;
 }
 
-@media screen and (max-width: 870px) {
-  .app-home {
-    margin-top: 10%;
-  }
-
-  .search {
-    width: 35vw
-  }
-}
-
-@media screen and (max-width: 750px) {
+@media screen and (max-width: 1000px) {
   .search {
     width: 40vw
-  }
-
-  .app {
-    padding-bottom: 85%;
-  }
-
-  .app-home {
-    margin-top: 13%;
-  }
-}
-
-@media screen and (max-width: 690px) {
-  .app-home {
-    margin-top: 18%;
-  }
-}
-
-@media screen and (max-width: 575px) {
-  .app {
-    padding-bottom: 95%;
-  }
-
-  .search {
-    width: 40vw
-  }
-
-  .app-home {
-    margin-top: 21%;
-  }
-}
-
-@media screen and (max-width: 539px) {
-  .app-home {
-    margin-top: 22%;
-  }
-}
-
-@media screen and (max-width: 575px) {
-  .app-home {
-    margin-top: 23%;
-  }
-}
-
-@media screen and (max-width: 414px) {
-  .app {
-    padding-bottom: 145%;
-  }
-
-  .search {
-    width: 50vw
-  }
-
-  .app-home {
-    margin-top: 25%;
   }
 }

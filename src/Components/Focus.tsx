@@ -24,11 +24,11 @@ const FocusCard = (props: Props) => {
       </NavLink>
       </div>
       <div className='focus-card'>
-        <h1>{props.locationName}, {props.locationRegion}, {props.locationCountry === "United States of America" ? "United States" : props.locationCountry} </h1>
+        <h1 className='focus-card-title'>{props.locationName}, {props.locationRegion}, {props.locationCountry === "United States of America" ? "United States" : props.locationCountry} </h1>
         <p className="focus-temp">{props.temp} °F</p>
         <img src={props.conditionIcon} className="img" />
         <h1>{props.conditionText}</h1>
-        <button className="save-button" onClick={props.toggleSaved}><span className="material-symbols-outlined">{props.saved}</span>
+        <button className="save-button" onClick={props.toggleSaved}><h1>Save Location</h1><span className="material-symbols-outlined">{props.saved}</span>
         </button>
       </div>
     </section>

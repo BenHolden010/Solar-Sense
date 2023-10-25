@@ -10,7 +10,6 @@ import ServerError from './Components/ServerError';
 import SavedLocations from './Components/SavedLocations';
 import PageNotFound from './Components/PageNotFound';
 
-
 type LocationData = {
   name: string;
   temp: number;
@@ -19,6 +18,7 @@ type LocationData = {
   icon: string;
   text: string;
 };
+
 function App() {
 
   const [locationName, setLocationName] = useState<string>("")
@@ -34,12 +34,10 @@ function App() {
     JSON.parse(sessionStorage.getItem("SESSION_STORAGE_KEY") ||'[]'
   ));
 
-
   useEffect(() => {
     const data = window.sessionStorage.getItem("SESSION_STORAGE_KEY")
     if (data !== null) setSavedLocations(JSON.parse(data))
   },[])
-
 
   useEffect(() => {
     if(savedLocations) {
@@ -51,56 +49,56 @@ function App() {
     setInput(event.target.value)
   }
 
-const removeLocation = (name:string) => {
-  const filteredSavedLocations = savedLocations.filter((location) => location.name !== name);
-  setSavedLocations(filteredSavedLocations);
-};
+  const removeLocation = (name:string) => {
+    const filteredSavedLocations = savedLocations.filter((location) => location.name !== name);
+    setSavedLocations(filteredSavedLocations);
+  };
 
   useEffect(() => {
     {input && getCity(input)
-    .then(data => {
-      setTemp(data?.current?.temp_f)
-      setLocationName(data?.location?.name)
-      setLocationRegion(data?.location?.region)
-      setLocationCountry(data?.location?.country)
-      setConditionText(data?.current?.condition?.text)
-      setConditionIcon(data?.current?.condition?.icon)
-      setServerError(false)
-      setSaved('bookmark')
-      {savedLocations.some(location=>location.name===data.location.name) && setSaved('bookmark_added')}
-    })
-    .catch(error => setServerError(true))
-  }
+      .then(data => {
+        setTemp(data?.current?.temp_f)
+        setLocationName(data?.location?.name)
+        setLocationRegion(data?.location?.region)
+        setLocationCountry(data?.location?.country)
+        setConditionText(data?.current?.condition?.text)
+        setConditionIcon(data?.current?.condition?.icon)
+        setServerError(false)
+        setSaved('bookmark')
+        {savedLocations.some(location=>location.name===data.location.name) && setSaved('bookmark_added')}
+      })
+      .catch(error => setServerError(true))
+    }
   }, [input])
 
-const toggleSaved = () => {
-  const newSaved = saved === 'bookmark' ? 'bookmark_added' : 'bookmark'
-  setSaved(newSaved)
-  { saved === 'bookmark' && setSavedLocations(
-    [...savedLocations, {
-      name: locationName, 
-      temp: temp, 
-      region: locationRegion, 
-      country: locationCountry, 
-      icon: conditionIcon, 
-      text: conditionText,
-    } ])
+  const toggleSaved = () => {
+    const newSaved = saved === 'bookmark' ? 'bookmark_added' : 'bookmark'
+    setSaved(newSaved)
+    { saved === 'bookmark' && setSavedLocations(
+      [...savedLocations, {
+        name: locationName, 
+        temp: temp, 
+        region: locationRegion, 
+        country: locationCountry, 
+        icon: conditionIcon, 
+        text: conditionText,
+      } ])
+    }
+    { saved === 'bookmark_added' && removeLocation(locationName)}
   }
-  { saved === 'bookmark_added' && removeLocation(locationName)}
-}
-const deleteSaved: React.MouseEventHandler<HTMLButtonElement> = (event) => {
-  console.log(event.target)
-  const target = event.target as HTMLButtonElement;
-  if (target && target.id) {
-    let filterSaved = savedLocations.filter(location => location.name !== target.id);
-    setSavedLocations(filterSaved);
-    setSaved('bookmark')
-  }
-};
+
+  const deleteSaved: React.MouseEventHandler<HTMLButtonElement> = (event) => {
+    const target = event.target as HTMLButtonElement;
+    if (target && target.id) {
+      let filterSaved = savedLocations.filter(location => location.name !== target.id);
+      setSavedLocations(filterSaved);
+      setSaved('bookmark')
+    }
+  };
 
   return (
-    <div className="app">
-      <Nav />
+    <div className="App">
+      <Nav/>
       <Routes>
         <Route path="/" element={<div className='app-home'><h2>Select Your Location</h2>
           <input type="text" placeholder="search for city here" onChange={handleChange} className="search" />
@@ -121,6 +119,5 @@ const deleteSaved: React.MouseEventHandler<HTMLButtonElement> = (event) => {
     </div>
   )
 }
-
 
 export default App;

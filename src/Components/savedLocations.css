@@ -7,7 +7,6 @@
 }
 
 .saved-section {
-  height: 100%;
   width: 100vw
 }
 
@@ -21,14 +20,13 @@
 .no-saved {
   color: white;
   font-size: 4vh;
-  margin-left: 43%
 }
 
 .home-button {
   cursor: pointer;
   border: none;
   height: 3.7vh;
-  width: 8.5vw;
+  width: 5em;
   border-radius: 5px;
   background-color: transparent;
   color: darkblue;
@@ -48,7 +46,6 @@
   flex-direction: column;
   border: 2px solid white;
   border-radius: 1em;
-  padding-left: 1%;
   height: 45vh;
   width: 18%;
   font-size: 80%;

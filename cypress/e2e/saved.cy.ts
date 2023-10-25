@@ -36,7 +36,7 @@ describe('saved locations section', () => {
     .get('.saved-card').should('be.visible')
     .get('.saved-card').contains('h1', 'Denver, Colorado, United States')
     .get('.saved-temp').contains('h1', '72.5 °F')
-    .get('img').should('have.attr', 'src').should('include', '//cdn.weatherapi.com/weather/64x64/day/116.png')
+    .get('img').last().should('have.attr', 'src').should('include', '//cdn.weatherapi.com/weather/64x64/day/116.png')
     .get('.saved-card').contains('h1', 'Partly cloudy')
     .get('#Denver').click()
     .get('.no-saved').contains('p', 'No Saved Locations')

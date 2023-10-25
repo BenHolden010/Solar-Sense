@@ -8,6 +8,4 @@ function getCity(city:string) {
         return res.json()})
 }
 
-export {
-  getCity
-}
+export { getCity }

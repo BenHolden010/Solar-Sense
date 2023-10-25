@@ -12,6 +12,7 @@ import PageNotFound from './Components/PageNotFound';
 
 type LocationData = {
   name: string;
+  key: string;
   temp: number;
   region: string;
   country: string;
@@ -103,7 +104,7 @@ function App() {
   }
 
   useEffect(() => {
-    {input && getCity(input)
+    {input.length>2 && getCity(input)
       .then(data => {
         setTemp(data?.current?.temp_f)
         setLocationName(data?.location?.name)
@@ -125,6 +126,7 @@ function App() {
     setSaved(newSaved)
     { saved === 'bookmark' && setSavedLocations(
       [...savedLocations, {
+        key: locationName,
         name: locationName, 
         temp: temp, 
         region: locationRegion, 

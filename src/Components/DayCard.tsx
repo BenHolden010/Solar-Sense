@@ -43,6 +43,7 @@ function DayCard({date, maxtemp_f, mintemp_f, totalprecip_in, totalsnow_cm, dail
   let displayedHours = newHours.map(hour=>{
     return(<HourCard 
       time={hour.time} 
+      key={hour.time} 
       conditionText={hour.condition.text} 
       conditionIcon={hour.condition.icon} 
       />)

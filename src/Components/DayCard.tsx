@@ -26,8 +26,8 @@ function DayCard({date, maxtemp_f, mintemp_f, totalprecip_in, totalsnow_cm, dail
     </div>
     <p>High: {maxtemp_f}F/Low: {mintemp_f}F</p>
     <p>{daily_chance_of_rain}% Chance Of Rain</p>
-    <p>{daily_chance_of_snow}% Chance Of Snow</p>
     <p>{totalprecip_in} Inches Total Rain</p>
+    <p>{daily_chance_of_snow}% Chance Of Snow</p>
     <p>{snowInches} Inches Total Snow</p>
     <p>{sunrise} sunrise<br/>{sunset} sunset</p>
   </div>)

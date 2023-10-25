@@ -1,18 +1,48 @@
 import './Focus.css'
 import { NavLink } from 'react-router-dom'
 
-interface Props {
+type FocusProps = {
+  days?: Days[]; // Make 'days' prop optional
+  temp: number;
   locationName: string;
-  locationRegion: string;
-  locationCountry: string;
   conditionText: string;
   conditionIcon: string;
-  temp: number;
+  locationRegion: string;
+  locationCountry: string;
+  toggleSaved: ()=>void;
   saved: string;
-  toggleSaved: () => any;
+};
+
+type Days = {
+  date: string;
+  day: {
+    maxtemp_f: number;
+    mintemp_f: number;
+    totalprecip_in: number;
+    totalsnow_cm: number;
+    daily_chance_of_rain: number;
+    daily_chance_of_snow: number;
+    condition: {
+      text: string;
+      icon: string;
+    }
+  };
+  astro: {
+    sunrise: string;
+    sunset: string;
+  };
+  hour: Hours[];
 }
 
-const FocusCard = (props: Props) => {
+type Hours = {
+  time: string;
+  condition: {
+    text: string;
+    icon: string;
+  }
+}
+
+const FocusCard = ({ days, temp, locationName, conditionText, conditionIcon, locationRegion, toggleSaved, saved, locationCountry }: FocusProps) => {
 
   return (
     <section className={`focus-section`}>
@@ -24,11 +54,11 @@ const FocusCard = (props: Props) => {
       </NavLink>
       </div>
       <div className='focus-card'>
-        <h1 className='focus-card-title'>{props.locationName}, {props.locationRegion}, {props.locationCountry === "United States of America" ? "United States" : props.locationCountry} </h1>
-        <p className="focus-temp">{props.temp} °F</p>
-        <img src={props.conditionIcon} className="img" />
-        <h1>{props.conditionText}</h1>
-        <button className="save-button" onClick={props.toggleSaved}><h1>Save Location</h1><span className="material-symbols-outlined">{props.saved}</span>
+        <h1 className='focus-card-title'>{locationName}, {locationRegion}, {locationCountry === "United States of America" ? "United States" : locationCountry} </h1>
+        <p className="focus-temp">{temp} °F</p>
+        <img src={conditionIcon} className="img" />
+        <h1>{conditionText}</h1>
+        <button className="save-button" onClick={()=>toggleSaved()}><h1>Save Location</h1><span className="material-symbols-outlined">{saved}</span>
         </button>
       </div>
     </section>

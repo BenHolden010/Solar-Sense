@@ -2,8 +2,8 @@ import React, { ChangeEvent } from 'react';
 import './App.css';
 import { getCity }from './ApiCalls'
 import { useState, useEffect } from 'react';
-import Card from "./Components/Card";
-import FocusCard from "./Components/Focus"
+import LocationSelect from "./Components/LocationSelect";
+import LocationView from './Components/LocationView';
 import Nav from "./Components/Nav"
 import {Routes, Route, Navigate } from 'react-router-dom'
 import ServerError from './Components/ServerError';
@@ -18,6 +18,7 @@ type LocationData = {
   country: string;
   icon: string;
   text: string;
+  days: Days[]
 };
 
 type Days = {
@@ -114,6 +115,7 @@ function App() {
         country: locationCountry, 
         icon: conditionIcon, 
         text: conditionText,
+        days: days
       } ])
     }
     { saved === 'bookmark_added' && removeLocation(locationName)}
@@ -135,12 +137,12 @@ function App() {
           <input type="text" placeholder="search for city here" onChange={handleChange} className="search" />
           {serverError && <ServerError />}
           <section className="weather-card-container">
-            {!serverError && locationName && <Card days={days} temp={temp} locationName={locationName}
+            {!serverError && locationName && <LocationSelect days={days} temp={temp} locationName={locationName}
              conditionText={conditionText} conditionIcon={conditionIcon} locationRegion={locationRegion}
               locationCountry={locationCountry} />}
           </section></div>} />
 
-        <Route path={`/location/${locationName}`} element={<FocusCard temp={temp} 
+        <Route path={`/location/${locationName}`} element={<LocationView temp={temp} days={days}
           locationName={locationName} locationRegion={locationRegion} conditionText={conditionText}
           conditionIcon={conditionIcon} locationCountry={locationCountry} toggleSaved={toggleSaved}
            saved={saved} />}

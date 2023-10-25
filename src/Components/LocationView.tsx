@@ -1,7 +1,9 @@
-import './Focus.css'
+// import { DayCard } from './DayCard';
+import { DayCard } from './DayCard';
+import './LocationView.css'
 import { NavLink } from 'react-router-dom'
 
-type FocusProps = {
+type LocationViewProps = {
   days?: Days[]; // Make 'days' prop optional
   temp: number;
   locationName: string;
@@ -42,8 +44,17 @@ type Hours = {
   }
 }
 
-const FocusCard = ({ days, temp, locationName, conditionText, conditionIcon, locationRegion, toggleSaved, saved, locationCountry }: FocusProps) => {
+const LocationView = ({ days, temp, locationName, conditionText, conditionIcon, locationRegion, toggleSaved, saved, locationCountry }: LocationViewProps) => {
 
+  let displayedDays = days?.map(day=>{
+    return (
+      <DayCard
+      date={day.date}
+      />
+      )
+    })
+    console.log(days)
+    
   return (
     <section className={`focus-section`}>
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
@@ -55,9 +66,12 @@ const FocusCard = ({ days, temp, locationName, conditionText, conditionIcon, loc
       </div>
       <div className='focus-card'>
         <h1 className='focus-card-title'>{locationName}, {locationRegion}, {locationCountry === "United States of America" ? "United States" : locationCountry} </h1>
-        <p className="focus-temp">{temp} °F</p>
+        <p className="focus-temp">Current Temp: {temp} °F</p>
         <img src={conditionIcon} className="img" />
         <h1>{conditionText}</h1>
+        <div className='days-container'>
+          {displayedDays}
+        </div>
         <button className="save-button" onClick={()=>toggleSaved()}><h1>Save Location</h1><span className="material-symbols-outlined">{saved}</span>
         </button>
       </div>
@@ -65,4 +79,4 @@ const FocusCard = ({ days, temp, locationName, conditionText, conditionIcon, loc
   )
 }
 
-export default FocusCard
+export default LocationView

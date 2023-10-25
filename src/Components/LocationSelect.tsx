@@ -1,14 +1,14 @@
-import './Card.css'
+import './LocationSelect.css'
 import {NavLink} from 'react-router-dom'
 
-interface Props {
-locationName: string;
-locationRegion: string;
-locationCountry: string;
-temp: number;
-conditionText: string;
-conditionIcon: string;
-}
+// interface Props {
+// locationName: string;
+// locationRegion: string;
+// locationCountry: string;
+// temp: number;
+// conditionText: string;
+// conditionIcon: string;
+// }
 
 type CardProps = {
   days?: Days[]; // Make 'days' prop optional

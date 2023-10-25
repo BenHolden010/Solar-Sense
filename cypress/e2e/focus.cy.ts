@@ -38,10 +38,10 @@ describe('Focus Page', () => {
     it('should display the selected location information', () => {
       cy.get('input').type('Denver').should('have.value', 'Denver')
         .get('.view-location-button').click()
-        .get(".focus-section").should('be.visible')
-        .get(".focus-card").first().contains("h1","Denver, Colorado, United States" )
-        .get(".focus-card").contains("p","72.5 °F" )
-        .get(".focus-card").contains("h1","Partly cloudy")
+        .get(".location-section").should('be.visible')
+        .get(".location-view").first().contains("h1","Denver, Colorado, United States" )
+        .get(".location-view").contains("h1","72.5 °F" )
+        .get(".location-view").contains("h1","Partly cloudy")
         .get(".save-button").should('be.visible')
     });
 })

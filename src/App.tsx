@@ -1,9 +1,9 @@
-import React, { ChangeEvent } from 'react';
+import { ChangeEvent } from 'react';
 import './App.css';
 import { getCity }from './ApiCalls'
 import { useState, useEffect } from 'react';
-import Card from "./Components/Card";
-import FocusCard from "./Components/Focus"
+import LocationSelect from "./Components/LocationSelect";
+import LocationView from './Components/LocationView';
 import Nav from "./Components/Nav"
 import {Routes, Route, Navigate } from 'react-router-dom'
 import ServerError from './Components/ServerError';
@@ -17,10 +17,40 @@ type LocationData = {
   country: string;
   icon: string;
   text: string;
+  days: Days[]
 };
 
-function App() {
+type Days = {
+  date: string;
+  day: {
+    maxtemp_f: number;
+    mintemp_f: number;
+    totalprecip_in: number;
+    totalsnow_cm: number;
+    daily_chance_of_rain: number;
+    daily_chance_of_snow: number;
+    condition: {
+      text: string;
+      icon: string;
+    }
+  };
+  astro: {
+    sunrise: string;
+    sunset: string;
+  };
+  hour: Hours[];
+}
 
+type Hours = {
+  time: string;
+  condition: {
+    text: string;
+    icon: string;
+  }
+}
+
+function App() {
+  
   const [locationName, setLocationName] = useState<string>("")
   const [locationRegion, setLocationRegion] = useState<string>("")
   const [locationCountry, setLocationCountry] = useState<string>("")
@@ -28,8 +58,9 @@ function App() {
   const [temp, setTemp] = useState<number>(0)
   const [conditionText, setConditionText] = useState<string>('')
   const [conditionIcon, setConditionIcon] = useState<string>('')
+  const [days, setDays] = useState<Days[]>([])
   const [serverError, setServerError] = useState<boolean>(false)
-  const [saved, setSaved] = useState('bookmark');
+  const [saved, setSaved] = useState<string>('bookmark');
   const [savedLocations, setSavedLocations] = useState<LocationData[]>(
     JSON.parse(sessionStorage.getItem("SESSION_STORAGE_KEY") ||'[]'
   ));
@@ -54,6 +85,23 @@ function App() {
     setSavedLocations(filteredSavedLocations);
   };
 
+  const selectLocation = (name: string) => {
+    getCity(name)
+      .then(data => {
+        setTemp(data.current.temp_f)
+        setLocationName(data.location.name)
+        setLocationRegion(data.location.region)
+        setLocationCountry(data.location.country)
+        setConditionText(data.current.condition.text)
+        setConditionIcon(data.current.condition.icon)
+        setDays(data.forecast.forecastday)
+        setServerError(false)
+        setSaved('bookmark')
+        {savedLocations.some(location=>location.name===data.location.name) && setSaved('bookmark_added')}
+      })
+      .catch(error => setServerError(true))
+  }
+
   useEffect(() => {
     {input && getCity(input)
       .then(data => {
@@ -63,6 +111,7 @@ function App() {
         setLocationCountry(data?.location?.country)
         setConditionText(data?.current?.condition?.text)
         setConditionIcon(data?.current?.condition?.icon)
+        setDays(data?.forecast?.forecastday)
         setServerError(false)
         setSaved('bookmark')
         {savedLocations.some(location=>location.name===data.location.name) && setSaved('bookmark_added')}
@@ -82,20 +131,17 @@ function App() {
         country: locationCountry, 
         icon: conditionIcon, 
         text: conditionText,
+        days: days
       } ])
     }
     { saved === 'bookmark_added' && removeLocation(locationName)}
   }
-
-  const deleteSaved: React.MouseEventHandler<HTMLButtonElement> = (event) => {
-    const target = event.target as HTMLButtonElement;
-    if (target && target.id) {
-      let filterSaved = savedLocations.filter(location => location.name !== target.id);
-      setSavedLocations(filterSaved);
-      setSaved('bookmark')
-    }
+  console.log(input)
+  const deleteSaved = (name: string) => {
+    const filteredSavedLocations = savedLocations.filter(location => location.name !== name);
+    setSavedLocations(filteredSavedLocations);
+    setSaved('bookmark');
   };
-
   return (
     <div className="App">
       <Nav/>
@@ -104,17 +150,20 @@ function App() {
           <input type="text" placeholder="search for city here" onChange={handleChange} className="search" />
           {serverError && <ServerError />}
           <section className="weather-card-container">
-            {!serverError && locationName && <Card temp={temp} locationName={locationName} conditionText={conditionText}
-              conditionIcon={conditionIcon} locationRegion={locationRegion} locationCountry={locationCountry} />}
-          </section></div>} />
+            {!serverError && locationName && <LocationSelect days={days} temp={temp} locationName={locationName}
+             conditionText={conditionText} conditionIcon={conditionIcon} locationRegion={locationRegion}
+              locationCountry={locationCountry} />}
+          </section></div>} />fdgsdf vcsvc 
 
-        <Route path={`/location/${locationName}`} element={<FocusCard temp={temp}
+        <Route path={`/location/${locationName}`} element={<LocationView temp={temp} days={days}
           locationName={locationName} locationRegion={locationRegion} conditionText={conditionText}
-          conditionIcon={conditionIcon} locationCountry={locationCountry} toggleSaved={toggleSaved} saved={saved} />}
+          conditionIcon={conditionIcon} locationCountry={locationCountry} toggleSaved={toggleSaved}
+           saved={saved} selectLocation={selectLocation}/>}
         />
-        <Route path='/saved-locations' element={<SavedLocations deleteSaved={deleteSaved} savedLocations={savedLocations} />} />
+        <Route path='/saved-locations' element={<SavedLocations deleteSaved={deleteSaved} 
+        savedLocations={savedLocations} selectLocation={selectLocation}/>} />
         <Route path="/404" element={<PageNotFound />} />
-        <Route path="*" element={<Navigate to="/404" />} />
+        {/* <Route path="*" element={<Navigate to="/404" />} /> */}
       </Routes>
     </div>
   )

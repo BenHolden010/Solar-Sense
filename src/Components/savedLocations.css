@@ -47,62 +47,16 @@
   border: 2px solid white;
   border-radius: 1em;
   height: 45vh;
-  width: 18%;
+  width: 25em;
   font-size: 80%;
   margin: 16px;
   color: white;
 }
 
+
+
 @media screen and (max-width: 1050px) {
   .saved-card {
-    width: 22%;
-  }
-}
-
-@media screen and (max-width: 870px) {
-  .saved-card {
-    width: 26%;
-  }
-}
-
-@media screen and (max-width: 750px) {
-  .saved-card {
-    width: 30%;
-  }
-}
-
-@media screen and (max-width: 690px) {
-  .saved-card {
-    width: 55%;
-  }
-  .saved-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center
-  }
-}
-
-@media screen and (max-width: 575px) {
-  .saved-card {
-    width: 65%;
-  }
-}
-
-@media screen and (max-width: 539px) {
-  .saved-card {
-    width: 70%;
-  }
-}
-
-@media screen and (max-width: 575px) {
-  .saved-card {
-    width: 75%;
-  }
-}
-
-@media screen and (max-width: 414px) {
-  .saved-card {
-    width: 80%;
+    max-width: 15em;
   }
 }

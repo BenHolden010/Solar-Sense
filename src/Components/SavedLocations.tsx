@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import './savedLocations.css'
 
 interface LocationData {
@@ -12,20 +12,25 @@ interface LocationData {
 
 interface Props {
   savedLocations: LocationData[];
-  deleteSaved: React.MouseEventHandler<HTMLButtonElement>;
+  deleteSaved: (name: string) => void;
+  selectLocation: (name: string) => void;
 }
 
 function SavedLocations(props: Props) {
   let all = props.savedLocations.map(location => {
     return (
-      <div className='saved-card' >
+    <div>
+      <Link to={`/location/${location.name}`} onClick={() => props.selectLocation(location.name)} className='saved-card'>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
         <h1>{location.name}, {location.region}, {location.country === "United States of America" ? "United States" : location.country}</h1>
         <h1 className="saved-temp">{location.temp} °F</h1>
         <img src={location.icon} />
         <h1>{location.text}</h1>
-        <button className="remove-saved" onClick={props.deleteSaved} ><span id={location.name} className="material-symbols-outlined">close</span></button>
-      </div>
+      </Link>
+      <button className="remove-saved" onClick={() => props.deleteSaved(location.name)}>
+  <span id={location.name} className="material-symbols-outlined">close</span>
+</button>
+    </div>
     )
   })
 

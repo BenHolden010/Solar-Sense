@@ -1,13 +1,10 @@
-.card {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.location-select {
   border: 2px solid white;
   border-radius: 1em;
   width: 80vw;
 }
 
-.card-text {
+.location-info {
   color: white;
   text-decoration-line: underline;
 }

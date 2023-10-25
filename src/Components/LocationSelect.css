@@ -1,4 +1,4 @@
-.card {
+.location-select {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -7,7 +7,7 @@
   width: 80vw;
 }
 
-.card-text {
+.location-info {
   color: white;
   text-decoration-line: underline;
 }

@@ -1,4 +1,4 @@
-.focus-card {
+.location-view {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -9,14 +9,32 @@
   width: 80vw;
 }
 
+.current-conditions {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: inherit;
+  flex-wrap: wrap;
+  background-color: #707298;
+  border-radius: 1em;
+  border: 2px solid black;
+  width: 70vw;
+}
+
+.days-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px;
+}
+
 .focus-card-title {
   font-size: 3em;
   margin-bottom: 0em;
 }
 
 .focus-temp {
-  font-size: 4em;
-  margin: 0.4em;
+  font-size: 2em;
+  margin: 0.5em;
 }
 
 .focus-section-nav {
@@ -43,11 +61,20 @@
   margin-top: 32px;
   background-color: transparent;
   border: none;
+  margin: 0;
 }
 
-.focus-section {
+.location-section {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+@media screen and (max-width: 1050px) {
+  .days-container {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+  }
 }

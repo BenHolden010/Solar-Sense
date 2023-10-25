@@ -49,12 +49,12 @@ type Hours = {
   }
 }
 
-const Card = ({ days, temp, locationName, conditionText, conditionIcon, locationRegion, locationCountry }: CardProps)  => {
+const LocationSelect = ({ days, temp, locationName, conditionText, conditionIcon, locationRegion, locationCountry }: CardProps)  => {
 
   return (
-      <NavLink className='card' to={`/location/${locationName}`}>
+      <NavLink className='location-select' to={`/location/${locationName}`}>
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-        <h1 className='card-text'>{locationName}, {locationRegion}, {locationCountry === "United States of America" ? "United States" : locationCountry} </h1>
+        <h1 className='location-info'>{locationName}, {locationRegion}, {locationCountry === "United States of America" ? "United States" : locationCountry} </h1>
         <button className="view-location-button"><span className="material-symbols-outlined">
         search
         </span></button>
@@ -63,4 +63,4 @@ const Card = ({ days, temp, locationName, conditionText, conditionIcon, location
   ) 
 }
 
-export default Card
+export default LocationSelect

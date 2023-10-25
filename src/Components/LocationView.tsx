@@ -1,4 +1,3 @@
-// import { DayCard } from './DayCard';
 import { DayCard } from './DayCard';
 import './LocationView.css'
 import { NavLink } from 'react-router-dom'
@@ -45,18 +44,28 @@ type Hours = {
 }
 
 const LocationView = ({ days, temp, locationName, conditionText, conditionIcon, locationRegion, toggleSaved, saved, locationCountry }: LocationViewProps) => {
-
+  console.log(days)
   let displayedDays = days?.map(day=>{
     return (
       <DayCard
+      key={day.date}
       date={day.date}
+      maxtemp_f={day.day.maxtemp_f}
+      mintemp_f={day.day.mintemp_f}
+      totalprecip_in={day.day.totalprecip_in}
+      totalsnow_cm={day.day.totalsnow_cm}
+      daily_chance_of_rain={day.day.daily_chance_of_rain}
+      daily_chance_of_snow={day.day.daily_chance_of_snow}
+      conditionText={day.day.condition.text}
+      conditionIcon={day.day.condition.icon}
+      sunrise={day.astro.sunrise}
+      sunset={day.astro.sunset}
       />
       )
     })
-    console.log(days)
     
   return (
-    <section className={`focus-section`}>
+    <section className="location-section">
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
       <div className="focus-section-nav">
       <NavLink to="/">  
@@ -64,11 +73,13 @@ const LocationView = ({ days, temp, locationName, conditionText, conditionIcon, 
       </button>
       </NavLink>
       </div>
-      <div className='focus-card'>
+      <div className='location-view'>
         <h1 className='focus-card-title'>{locationName}, {locationRegion}, {locationCountry === "United States of America" ? "United States" : locationCountry} </h1>
-        <p className="focus-temp">Current Temp: {temp} °F</p>
-        <img src={conditionIcon} className="img" />
-        <h1>{conditionText}</h1>
+        <div className='current-conditions' >
+          <h1 className="focus-temp">Current Conditions: {temp} °F</h1>
+          <img src={conditionIcon} className="img" />
+          <h1>{conditionText}</h1>
+        </div>
         <div className='days-container'>
           {displayedDays}
         </div>

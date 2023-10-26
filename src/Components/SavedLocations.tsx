@@ -12,7 +12,7 @@ interface LocationData {
 
 interface Props {
   savedLocations: LocationData[];
-  deleteSaved: (name: string) => void;
+  removeLocation: (name: string) => void;
   selectLocation: (name: string) => void;
 }
 
@@ -27,7 +27,7 @@ function SavedLocations(props: Props) {
         <img src={location.icon} />
         <h1>{location.text}</h1>
       </Link>
-      <button className="remove-saved" onClick={() => props.deleteSaved(location.name)}>
+      <button className="remove-saved" onClick={() => props.removeLocation(location.name)}>
   <span id={location.name} className="material-symbols-outlined">close</span>
 </button>
     </div>

@@ -26,12 +26,17 @@ describe('Home Page', () => {
       statusCode: 200,
       fixture: "Denver"
     })
+    .intercept('GET', 'https://api.weatherapi.com/v1/forecast.json?key=46ac1049aa534aed954140046231907&q=???&days=3&aqi=yes&alerts=no', {
+      statusCode: 500,
+      body: '{error}'
+    })
   })
   
   it('user sees a Form with an input field on the home page', () => {
     cy.get('nav').should('be.visible')
     .url().should('include', '/')
-    .get('.title').contains("h1",'Solar Sense')
+    .get('.title').contains("h1",'Solar+')
+    .get('.black').contains("p",'=Sense')
     .get('.view-saved-button')
     .get('h2').contains('Select Your Location')
     .get('input').should("be.visible")
@@ -51,7 +56,7 @@ describe('Home Page', () => {
   // })
 
   it('should display error message when a non valid location is typed', () => {
-    cy.get('input').type('De').should('have.value', 'De')
+    cy.get('input').type('???').should('have.value', '???')
     .get('div').contains('p', 'Please enter a valid location.')
   })
 });  

@@ -22,6 +22,10 @@ describe('saved locations section', () => {
       statusCode: 200,
       fixture: "Denver"
     })
+    .intercept('GET', 'https://api.weatherapi.com/v1/forecast.json?key=46ac1049aa534aed954140046231907&q=Denver,Colorado&days=3&aqi=yes&alerts=no', {
+      statusCode: 200,
+      fixture: "Denver"
+    })
     .visit('http://localhost:3000')
   })
 

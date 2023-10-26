@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { DayCard } from './DayCard';
 import './LocationView.css'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useParams } from 'react-router-dom'
 
 type LocationViewProps = {
   days?: Days[]; // Make 'days' prop optional
@@ -13,6 +13,7 @@ type LocationViewProps = {
   locationCountry: string;
   toggleSaved: ()=>void;
   saved: string;
+  selectLocation: (name: string) => void;
 };
 
 type Days = {
@@ -44,7 +45,14 @@ type Hours = {
   }
 }
 
-const LocationView = ({ days, temp, locationName, conditionText, conditionIcon, locationRegion, toggleSaved, saved, locationCountry}: LocationViewProps) => {
+const LocationView = ({ days, temp, locationName, conditionText, conditionIcon, locationRegion, toggleSaved, saved, locationCountry, selectLocation}: LocationViewProps) => {
+  let location = `${useParams().locationName},${useParams().locationRegion}`
+  // console.log(useParams())
+  // console.log('hello')
+  // console.log(locationName)
+  useEffect(()=>{
+      selectLocation(location)
+  },[])
 
   let displayedDays = days?.map(day=>{
     return (

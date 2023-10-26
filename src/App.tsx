@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import LocationSelect from "./Components/LocationSelect";
 import LocationView from './Components/LocationView';
 import Nav from "./Components/Nav"
-import {Routes, Route, Navigate } from 'react-router-dom'
+import {Routes, Route } from 'react-router-dom'
 import ServerError from './Components/ServerError';
 import SavedLocations from './Components/SavedLocations';
 import PageNotFound from './Components/PageNotFound';
@@ -158,11 +158,12 @@ function App() {
               locationCountry={locationCountry} />}
           </section></div>} /> 
 
-        <Route path={`/location/${locationName}`} element={<LocationView temp={temp} days={days}
+        <Route path={`/location/:locationName/:locationRegion`} element={<LocationView temp={temp} days={days}
           locationName={locationName} locationRegion={locationRegion} conditionText={conditionText}
           conditionIcon={conditionIcon} locationCountry={locationCountry} toggleSaved={toggleSaved}
-           saved={saved} />}
+           saved={saved} selectLocation={selectLocation}/>}
         />
+
         <Route path='/saved-locations' element={<SavedLocations deleteSaved={deleteSaved} 
         savedLocations={savedLocations} selectLocation={selectLocation}/>} />
         <Route path="/404" element={<PageNotFound />} />

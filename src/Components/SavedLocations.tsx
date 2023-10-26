@@ -13,18 +13,18 @@ interface LocationData {
 interface Props {
   savedLocations: LocationData[];
   removeLocation: (name: string) => void;
-  selectLocation: (name: string) => void;
+  // selectLocation: (name: string) => void;
 }
 
 function SavedLocations(props: Props) {
   let all = props.savedLocations.map(location => {
     return (
     <div key={location.name} className='saved-card' >
-      <Link to={`/location/${location.name}/${location.region}`} onClick={() => props.selectLocation(`${location.name},${location.region}`)} className='saved-link' key={location.name}>
+      <Link to={`/location/${location.name}/${location.region}`} className='saved-link' key={location.name}>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
         <h1>{location.name}, {location.region}, {location.country === "United States of America" ? "United States" : location.country}</h1>
         <h1 className="saved-temp">{location.temp} °F</h1>
-        <img src={location.icon} />
+        <img src={location.icon} alt={`${location.text}`}/>
         <h1>{location.text}</h1>
       </Link>
       <button className="remove-saved" onClick={() => props.removeLocation(location.name)}>

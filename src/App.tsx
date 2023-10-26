@@ -99,33 +99,22 @@ function App() {
         setDays(data.forecast.forecastday)
         setServerError(false)
         setSaved('bookmark')
-        {savedLocations.some(location=>location.name===data.location.name) && setSaved('bookmark_added')}
+        savedLocations.some(location=>location.name===data.location.name) && setSaved('bookmark_added')
       })
       .catch(error => setServerError(true))
   }
 
   useEffect(() => {
-    {input.length>2 && getCity(input)
-      .then(data => {
-        setTemp(data?.current?.temp_f)
-        setLocationName(data?.location?.name)
-        setLocationRegion(data?.location?.region)
-        setLocationCountry(data?.location?.country)
-        setConditionText(data?.current?.condition?.text)
-        setConditionIcon(data?.current?.condition?.icon)
-        setDays(data?.forecast?.forecastday)
-        setServerError(false)
-        setSaved('bookmark')
-        {savedLocations.some(location=>location.name===data.location.name) && setSaved('bookmark_added')}
-      })
-      .catch(error => setServerError(true))
+    if (input.length > 2) {
+      selectLocation(input);
     }
   }, [input])
 
   const toggleSaved = () => {
     const newSaved = saved === 'bookmark' ? 'bookmark_added' : 'bookmark'
     setSaved(newSaved)
-    { saved === 'bookmark' && setSavedLocations(
+    saved === 'bookmark' ? 
+    setSavedLocations(
       [...savedLocations, {
         key: locationName,
         name: locationName, 
@@ -136,15 +125,8 @@ function App() {
         text: conditionText,
         days: days
       } ])
-    }
-    { saved === 'bookmark_added' && removeLocation(locationName)}
+    : removeLocation(locationName)
   }
- 
-  // const deleteSaved = (name: string) => {
-  //   const filteredSavedLocations = savedLocations.filter(location => location.name !== name);
-  //   setSavedLocations(filteredSavedLocations);
-  //   setSaved('bookmark');
-  // };
 
   return (
     <div className="App">
@@ -154,9 +136,8 @@ function App() {
           <input type="text" placeholder="search for city here" onChange={handleChange} className="search" />
           {serverError && <ServerError />}
           <section className="weather-card-container">
-            {!serverError && locationName && <LocationSelect days={days} temp={temp} locationName={locationName}
-             conditionText={conditionText} conditionIcon={conditionIcon} locationRegion={locationRegion}
-              locationCountry={locationCountry} />}
+            {!serverError && locationName && <LocationSelect locationName={locationName} 
+            locationRegion={locationRegion} locationCountry={locationCountry} />}
           </section></div>} /> 
 
         <Route path={`/location/:locationName/:locationRegion`} element={<LocationView temp={temp} days={days}
@@ -166,7 +147,7 @@ function App() {
         />
 
         <Route path='/saved-locations' element={<SavedLocations removeLocation={removeLocation} 
-        savedLocations={savedLocations} selectLocation={selectLocation}/>} />
+        savedLocations={savedLocations} />} />
         <Route path="/404" element={<PageNotFound />} />
         {/* <Route path="*" element={<Navigate to="/404" />} /> This code doesnt work with the dynamic rendering of the saved locations page*/}
       </Routes>

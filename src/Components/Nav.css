@@ -35,3 +35,9 @@
     border-radius: 1em;
     padding: 0.5em;
 }
+
+@media screen and (max-width: 1050px) {
+  .title {
+    font-size: 4vh;
+}
+}

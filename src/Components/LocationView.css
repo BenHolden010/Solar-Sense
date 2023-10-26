@@ -5,6 +5,7 @@
   flex-direction: column;
   border: 2px solid white;
   border-radius: 1em;
+  font-size: 1.1em;
   text-shadow: .5px .5px black;
   width: 80vw;
 }

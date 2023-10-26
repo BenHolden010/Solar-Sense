@@ -11,45 +11,12 @@ import {NavLink} from 'react-router-dom'
 // }
 
 type CardProps = {
-  days?: Days[]; // Make 'days' prop optional
-  temp: number;
   locationName: string;
-  conditionText: string;
-  conditionIcon: string;
   locationRegion: string;
   locationCountry: string;
 };
 
-type Days = {
-  date: string;
-  day: {
-    maxtemp_f: number;
-    mintemp_f: number;
-    totalprecip_in: number;
-    totalsnow_cm: number;
-    daily_chance_of_rain: number;
-    daily_chance_of_snow: number;
-    condition: {
-      text: string;
-      icon: string;
-    }
-  };
-  astro: {
-    sunrise: string;
-    sunset: string;
-  };
-  hour: Hours[];
-}
-
-type Hours = {
-  time: string;
-  condition: {
-    text: string;
-    icon: string;
-  }
-}
-
-const LocationSelect = ({ days, temp, locationName, conditionText, conditionIcon, locationRegion, locationCountry }: CardProps)  => {
+const LocationSelect = ({ locationName, locationRegion, locationCountry }: CardProps)  => {
 
   return (
       <NavLink className='location-select' to={`/location/${locationName}/${locationRegion}`}>

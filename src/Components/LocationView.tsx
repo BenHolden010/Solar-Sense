@@ -46,13 +46,13 @@ type Hours = {
 }
 
 const LocationView = ({ days, temp, locationName, conditionText, conditionIcon, locationRegion, toggleSaved, saved, locationCountry, selectLocation}: LocationViewProps) => {
-  let location = `${useParams().locationName},${useParams().locationRegion}`
-  // console.log(useParams())
-  // console.log('hello')
-  // console.log(locationName)
-  useEffect(()=>{
-      selectLocation(location)
-  },[])
+  const { locationName: paramLocationName, locationRegion: paramLocationRegion } = useParams();
+  
+  useEffect(() => {
+    const location = `${paramLocationName},${paramLocationRegion}`;
+    selectLocation(location);
+  }, [paramLocationName, paramLocationRegion, selectLocation]);
+
 
   let displayedDays = days?.map(day=>{
     return (
@@ -87,8 +87,10 @@ const LocationView = ({ days, temp, locationName, conditionText, conditionIcon, 
         <h1 className='focus-card-title'>{locationName}, {locationRegion}, {locationCountry === "United States of America" ? "United States" : locationCountry} </h1>
         <div className='current-conditions' >
           <h1 className="focus-temp">Current Conditions: {temp} °F</h1>
-          <img src={conditionIcon} className="img" />
-          <h1>{conditionText}</h1>
+          <div className="text-img">
+            <img src={conditionIcon} className="img" alt={`${conditionText}`} />
+            <h1 className='condition-text'>{conditionText}</h1>
+          </div>
         </div>
         <div className='days-container'>
           {displayedDays}

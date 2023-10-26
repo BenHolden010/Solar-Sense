@@ -11,22 +11,38 @@ h2, p {
   padding: 1em;
 }
 
+.date {
+  width: 5em
+}
+
 .img {
-  width: 4em;
-  height: 4em;
+  width: 10vw;
+  height: 10vw;
+}
+
+.condition-img{
+  margin-top: -1em;
+} 
+
+.condition-text{
+  margin-top: -.5em;
+}
+
+.high-low{
+  width: 5em
 }
 
 .rise-set {
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: center;
 }
 
 .giphy-img {
   width: 3em;
   height: 3em;
-  border-radius: 1em;
-  padding: 0em;
+  border-radius: 2em;
+  margin: 7px
 }
 
 .condition-ti {

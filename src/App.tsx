@@ -156,12 +156,12 @@ function App() {
             {!serverError && locationName && <LocationSelect days={days} temp={temp} locationName={locationName}
              conditionText={conditionText} conditionIcon={conditionIcon} locationRegion={locationRegion}
               locationCountry={locationCountry} />}
-          </section></div>} />fdgsdf vcsvc 
+          </section></div>} /> 
 
         <Route path={`/location/${locationName}`} element={<LocationView temp={temp} days={days}
           locationName={locationName} locationRegion={locationRegion} conditionText={conditionText}
           conditionIcon={conditionIcon} locationCountry={locationCountry} toggleSaved={toggleSaved}
-           saved={saved} selectLocation={selectLocation}/>}
+           saved={saved} />}
         />
         <Route path='/saved-locations' element={<SavedLocations deleteSaved={deleteSaved} 
         savedLocations={savedLocations} selectLocation={selectLocation}/>} />

@@ -13,7 +13,6 @@ type LocationViewProps = {
   locationCountry: string;
   toggleSaved: ()=>void;
   saved: string;
-  selectLocation: (name: string) => void;
 };
 
 type Days = {
@@ -45,11 +44,7 @@ type Hours = {
   }
 }
 
-const LocationView = ({ days, temp, locationName, conditionText, conditionIcon, locationRegion, toggleSaved, saved, locationCountry, selectLocation}: LocationViewProps) => {
-  
-  useEffect(()=>{
-    selectLocation(locationName)
-  },[])
+const LocationView = ({ days, temp, locationName, conditionText, conditionIcon, locationRegion, toggleSaved, saved, locationCountry}: LocationViewProps) => {
 
   let displayedDays = days?.map(day=>{
     return (
